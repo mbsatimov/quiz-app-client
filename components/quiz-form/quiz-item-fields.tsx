@@ -1,6 +1,6 @@
 import { TCreateQuizSchema } from '@/lib/validation/quiz-schema'
 import { Button, Card, CardBody, Input } from '@nextui-org/react'
-import { Minus, Plus } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { Controller, UseFormReturn, useFieldArray } from 'react-hook-form'
 import { ImageField } from './image-field'
 import { QuizItemOptions } from './quiz-item-options'
@@ -28,7 +28,7 @@ export const QuizItemFields: React.FC<QuizItemFieldsProps> = ({ form }) => {
 	return (
 		<div className='space-y-4 pt-2'>
 			{fields.map((field, index) => (
-				<div key={field.id} className='relative'>
+				<div key={field.id} className='relative group'>
 					<Card
 						isBlurred
 						className='border-none bg-background/60 dark:bg-default-100/50'
@@ -57,15 +57,15 @@ export const QuizItemFields: React.FC<QuizItemFieldsProps> = ({ form }) => {
 						</CardBody>
 					</Card>
 					<Button
-						className='absolute left-[102%] top-0'
+						className='group-hover:opacity-100 md:opacity-0 group-hover:visible md:invisible absolute right-1/2 translate-x-1/2 -top-5'
+						radius='full'
 						size='sm'
 						variant='flat'
 						color='danger'
-						isIconOnly
 						type='button'
 						onClick={() => remove(index)}
 					>
-						<Minus />
+						Remove question
 					</Button>
 				</div>
 			))}

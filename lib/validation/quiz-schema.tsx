@@ -37,11 +37,9 @@ export const CreateQuizSchema = z.object({
 		.refine((val) => val.length === 0 || datetimeRegex.test(val), {
 			message: 'Invalid date',
 		}),
-	duration: z
-		.string()
-		.refine((val) => val.length === 0 || timeRegex.test(val), {
-			message: 'Invalid time',
-		}),
+	duration: z.string().refine((val) => val > '0', {
+		message: 'Invalid duration',
+	}),
 	quizItems: z.array(
 		z.object({
 			image: ImageSchema,

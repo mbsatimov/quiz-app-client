@@ -35,6 +35,8 @@ export const CreateQuizForm = () => {
 		toast.success('Quiz created successfully')
 	}
 
+	console.log(form.getValues())
+
 	return (
 		<form className='space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
 			<QuizDetailsFields

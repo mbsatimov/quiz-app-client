@@ -1,7 +1,8 @@
 'use client'
 
 import { TCreateQuizSchema } from '@/lib/validation/quiz-schema'
-import { Image } from '@nextui-org/react'
+import { Button, Image } from '@nextui-org/react'
+import { X } from 'lucide-react'
 import { useDropzone } from 'react-dropzone'
 import { UseFormReturn } from 'react-hook-form'
 
@@ -21,7 +22,7 @@ export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
 	return (
 		<div
 			{...getRootProps()}
-			className='cursor-pointer border-3 border-dashed rounded-md flex items-center justify-center min-h-[100px] w-full'
+			className='group/image relative cursor-pointer border-3 border-dashed rounded-md flex items-center justify-center min-h-[100px] w-full'
 		>
 			<input
 				{...getInputProps({
@@ -39,6 +40,20 @@ export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
 				) : (
 					<p>Drag and drop image here or click to browse.</p>
 				)}
+				{image ? (
+					<Button
+						className='group-hover/image:opacity-100 md:opacity-0 group-hover/image:visible md:invisible absolute -right-2 -top-2 w-4'
+						radius='full'
+						size='sm'
+						variant='flat'
+						color='danger'
+						isIconOnly
+						type='button'
+						onClick={() => form.setValue(`quizItems.${itemIndex}.image`, null)}
+					>
+						<X size={16} />
+					</Button>
+				) : null}
 			</div>
 		</div>
 	)

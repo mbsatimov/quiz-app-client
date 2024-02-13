@@ -8,7 +8,7 @@ export const siteConfig = {
 	navItems: [
 		{
 			label: 'Home',
-			href: PAGES.HOME,
+			href: PAGES.QUIZZES,
 		},
 		{
 			label: 'Create Quiz',

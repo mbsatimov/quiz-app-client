@@ -63,15 +63,18 @@ export const QuizDetailsFields: React.FC<QuizDetailsFieldsProps> = ({
 					</p>
 				</div>
 				<div>
-					<Label className='text-[#1a7ff2] font-normal'>Duration</Label>
-					<InputWithMask
+					<Input
 						{...register('duration')}
-						mask='99:99'
-						placeholder='hh:mm'
+						color='primary'
+						min={1}
+						labelPlacement={'outside'}
+						isInvalid={errors.duration ? true : false}
+						errorMessage={errors.duration && errors.duration.message}
+						label='Duration'
+						type='number'
+						inputMode='numeric'
+						placeholder='Minutes'
 					/>
-					<p className='text-[#f31260] text-sm'>
-						{errors.duration && errors.duration.message}
-					</p>
 				</div>
 			</div>
 		</>
