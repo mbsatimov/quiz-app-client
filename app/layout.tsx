@@ -1,8 +1,7 @@
-import { Navbar } from '@/components/navbar/navbar'
 import { fontSans } from '@/config/fonts'
 import { siteConfig } from '@/config/site'
+import { cn } from '@/lib/utils'
 import '@/styles/globals.css'
-import clsx from 'clsx'
 import { Metadata } from 'next'
 import { Toaster } from 'sonner'
 import { Providers } from './providers'
@@ -29,18 +28,13 @@ export default function RootLayout({
 		<html lang='en' suppressHydrationWarning>
 			<head />
 			<body
-				className={clsx(
+				className={cn(
 					'min-h-screen bg-background font-sans antialiased',
 					fontSans.variable
 				)}
 			>
 				<Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
-					<div className='relative flex flex-col min-h-screen'>
-						<Navbar />
-						<main className='container mx-auto pt-6 md:pt-12 px-4 md:px-6 flex-grow max-w-4xl'>
-							{children}
-						</main>
-					</div>
+					{children}
 				</Providers>
 				<Toaster position='top-center' richColors closeButton />
 			</body>

@@ -1,0 +1,30 @@
+{
+	"plugins": ["prettier-plugin-tailwindcss"],
+	"semi": false,
+	"useTabs": true,
+	"editor.formatOnPaste": true,
+	"singleQuote": true,
+	"jsxSingleQuote": true,
+	"enableDebugLogs": true,
+	"tabWidth": 2,
+	"singleAttributePerLine": true,
+	"withNodeModules": true,
+	"importOrder": [
+		"^(react/(.*)$)|^(react$)",
+		"^(next/(.*)$)|^(next$)",
+		"<THIRD_PARTY_MODULES>",
+		"",
+		"^types$",
+		"^@/types/(.*)$",
+		"^@/config/(.*)$",
+		"^@/lib/(.*)$",
+		"^@/hooks/(.*)$",
+		"^@/components/ui/(.*)$",
+		"^@/components/(.*)$",
+		"^@/registry/(.*)$",
+		"^@/styles/(.*)$",
+		"^@/app/(.*)$",
+		"",
+		"^[./]"
+	]
+}

@@ -1,34 +1,45 @@
-import { title } from '@/components/primitives'
-import { IStudentQuiz } from '@/types/student-quiz'
-import { format } from 'date-fns'
+'use client'
 
-const data: IStudentQuiz = {
-	id: 1,
-	duration: 10,
-	title: 'Quiz 1',
-	description:
-		'lorem ipsum dolor sit amet consectetur adipiscing elit amet consectetur adipiscing elit',
-	startDateTime: '2022-01-01',
-	endDateTime: '2022-01-02',
-	quizItems: [],
-}
+import { QuizContent } from '@/components/quiz-solver/quiz-content'
+import { QuizControl } from '@/components/quiz-solver/quiz-control'
+import { QuizSolverHeader } from '@/components/quiz-solver/quiz-solver-header'
+import { cn } from '@/lib/utils'
+import { useState } from 'react'
+import { data } from './data'
 
 export default function StudentQuizPage({
 	params,
 }: {
 	params: { quizId: string }
 }) {
+	const [isStarted, setIsStarted] = useState<boolean>(false)
+
 	return (
-		<div>
-			<h1 className={title({ size: 'sm', className: 'text-center block' })}>
-				{data.title}
-			</h1>
-			<p>{data.description}</p>
-			<p>
-				{format(new Date(data.startDateTime), 'dd MMM yyyy HH:mm')}
-				{' - '}
-				{format(new Date(data.endDateTime), 'dd MMM yyyy HH:mm')}
-			</p>
+		<div className='h-full relative max-w-2xl w-full mx-auto'>
+			<div
+				className={cn(
+					'z-20 left-0 right-0 transform duration-1000 absolute top-[85%]',
+					{ 'top-0': isStarted }
+				)}
+			>
+				<QuizControl
+					data={data}
+					isStarted={isStarted}
+					setIsStarted={setIsStarted}
+				/>
+			</div>
+			<div
+				className={cn('transition-all', {
+					'opacity-0 invisible hidden': isStarted,
+				})}
+			>
+				<QuizSolverHeader data={data} />
+			</div>
+			{isStarted && (
+				<div className='absolute top-0 bottom-0 left-0 right-0'>
+					<QuizContent /* quizId={params.quizId} */ data={data} />
+				</div>
+			)}
 		</div>
 	)
 }
