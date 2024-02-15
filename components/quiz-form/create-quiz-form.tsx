@@ -18,12 +18,12 @@ export const CreateQuizForm = () => {
 	const form = useForm<TCreateQuizSchema>({
 		resolver: zodResolver(CreateQuizSchema),
 		defaultValues: {
-			quizItems: [
+			questions: [
 				{
 					question: '',
 					options: [
-						{ isCorrect: false, option: '' },
-						{ isCorrect: false, option: '' },
+						{ isCorrect: false, label: '' },
+						{ isCorrect: false, label: '' },
 					],
 				},
 			],
@@ -38,7 +38,10 @@ export const CreateQuizForm = () => {
 	console.log(form.getValues())
 
 	return (
-		<form className='space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
+		<form
+			className='space-y-6'
+			onSubmit={form.handleSubmit(onSubmit)}
+		>
 			<QuizDetailsFields
 				errors={form.formState.errors}
 				register={form.register}

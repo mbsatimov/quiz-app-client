@@ -9,35 +9,41 @@ interface QuizItemFieldsProps {
 	form: UseFormReturn<TCreateQuizSchema>
 }
 
-const defaultQuizItem: TCreateQuizSchema['quizItems'][0] = {
+const defaultQuizItem: TCreateQuizSchema['questions'][0] = {
 	question: '',
 	options: [
-		{ isCorrect: false, option: '' },
-		{ isCorrect: false, option: '' },
+		{ isCorrect: false, label: '' },
+		{ isCorrect: false, label: '' },
 	],
 }
 
 export const QuizItemFields: React.FC<QuizItemFieldsProps> = ({ form }) => {
 	const { fields, append, remove } = useFieldArray({
 		control: form.control,
-		name: 'quizItems',
+		name: 'questions',
 	})
 
-	const errors = form.formState.errors.quizItems
+	const errors = form.formState.errors.questions
 
 	return (
 		<div className='space-y-4 pt-2'>
 			{fields.map((field, index) => (
-				<div key={field.id} className='relative group'>
+				<div
+					key={field.id}
+					className='group relative'
+				>
 					<Card
 						isBlurred
 						className='border-none bg-background/60 dark:bg-default-100/50'
 						shadow='sm'
 					>
 						<CardBody className='space-y-8'>
-							<ImageField form={form} itemIndex={index} />
+							<ImageField
+								form={form}
+								itemIndex={index}
+							/>
 							<Controller
-								name={`quizItems.${index}.question`}
+								name={`questions.${index}.question`}
 								control={form.control}
 								render={({ field }) => (
 									<Input
@@ -53,11 +59,14 @@ export const QuizItemFields: React.FC<QuizItemFieldsProps> = ({ form }) => {
 								)}
 							/>
 
-							<QuizItemOptions form={form} itemIndex={index} />
+							<QuizItemOptions
+								form={form}
+								itemIndex={index}
+							/>
 						</CardBody>
 					</Card>
 					<Button
-						className='group-hover:opacity-100 md:opacity-0 group-hover:visible md:invisible absolute right-1/2 translate-x-1/2 -top-5'
+						className='absolute -top-5 right-1/2 translate-x-1/2 group-hover:visible group-hover:opacity-100 md:invisible md:opacity-0'
 						radius='full'
 						size='sm'
 						variant='flat'

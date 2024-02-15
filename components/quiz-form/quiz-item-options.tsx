@@ -15,10 +15,10 @@ export const QuizItemOptions: React.FC<QuizItemOptionsProps> = ({
 }) => {
 	const { fields, append, remove } = useFieldArray({
 		control: form.control,
-		name: `quizItems.${itemIndex}.options`,
+		name: `questions.${itemIndex}.options`,
 	})
 
-	const errors = form.formState.errors.quizItems?.[itemIndex]?.options
+	const errors = form.formState.errors.questions?.[itemIndex]?.options
 
 	return (
 		<div className='space-y-4'>
@@ -27,9 +27,12 @@ export const QuizItemOptions: React.FC<QuizItemOptionsProps> = ({
 				errorMessage={errors?.root?.message}
 			>
 				{fields.map((field, index) => (
-					<div key={field.id} className='flex items-center gap-2'>
+					<div
+						key={field.id}
+						className='flex items-center gap-2'
+					>
 						<Controller
-							name={`quizItems.${itemIndex}.options.${index}.isCorrect`}
+							name={`questions.${itemIndex}.options.${index}.isCorrect`}
 							control={form.control}
 							render={({ field }) => (
 								<Radio
@@ -37,20 +40,17 @@ export const QuizItemOptions: React.FC<QuizItemOptionsProps> = ({
 									onChange={(e) => {
 										form
 											.getValues()
-											.quizItems[itemIndex].options.map((_, i) =>
-												form.setValue(
-													`quizItems.${itemIndex}.options.${i}.isCorrect`,
-													false
-												)
-											)
+											.questions[
+												itemIndex
+											].options.map((_, i) => form.setValue(`questions.${itemIndex}.options.${i}.isCorrect`, false))
 										field.onChange(e.target.checked)
-										form.clearErrors(`quizItems.${itemIndex}.options`)
+										form.clearErrors(`questions.${itemIndex}.options`)
 									}}
 								/>
 							)}
 						/>
 						<Controller
-							name={`quizItems.${itemIndex}.options.${index}.option`}
+							name={`questions.${itemIndex}.options.${index}.option`}
 							control={form.control}
 							render={({ field }) => (
 								<Input
@@ -82,7 +82,7 @@ export const QuizItemOptions: React.FC<QuizItemOptionsProps> = ({
 				variant='flat'
 				size='sm'
 				aria-label='Take a photo'
-				onClick={() => append({ isCorrect: false, option: '' })}
+				onClick={() => append({ isCorrect: false, label: '' })}
 				color='primary'
 				startContent={<Plus />}
 			>

@@ -25,18 +25,20 @@ export default function RootLayout({
 	children: React.ReactNode
 }) {
 	return (
-		<html lang='en' suppressHydrationWarning>
+		<html lang='en'>
 			<head />
 			<body
 				className={cn(
 					'min-h-screen bg-background font-sans antialiased',
-					fontSans.variable
+					fontSans.variable,
 				)}
 			>
-				<Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
-					{children}
-				</Providers>
-				<Toaster position='top-center' richColors closeButton />
+				<Providers>{children}</Providers>
+				<Toaster
+					position='top-center'
+					richColors
+					closeButton
+				/>
 			</body>
 		</html>
 	)

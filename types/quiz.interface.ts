@@ -1,24 +1,20 @@
-export interface IQuizItem {
-	id: number
-	attachment: string | null
-	question: string
-	options: {
-		option: string
-		isCorrect: boolean
-	}[]
-}
+import { ICreateQuestion, IQuestion } from '@/types/question.interface'
 
 export interface IQuiz {
 	id: number
 	title: string
 	description: string | null
-	startDateTime: string
-	endDateTime: string
+	isVisible: boolean
 	duration: number
-	quizItems: IQuizItem[]
+	questions: IQuestion[]
 }
 
-export interface IQuizPreview
-	extends Omit<IQuiz, 'description' | 'quizItems'> {}
+export interface IQuizPreview extends Omit<IQuiz, 'questions'> {}
 
-export interface ICreateQuiz extends Omit<IQuiz, 'id'> {}
+export interface ICreateQuiz {
+	title: string
+	description: string | null
+	isVisible: boolean
+	duration: number
+	questions: ICreateQuestion[]
+}

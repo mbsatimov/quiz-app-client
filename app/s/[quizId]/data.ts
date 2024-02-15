@@ -1,25 +1,26 @@
-import { IStudentQuiz } from '@/types/student-quiz'
+import { IQuiz } from '@/types/quiz.interface'
 
-export const data: IStudentQuiz = {
+export const data: IQuiz = {
 	id: 1,
 	duration: 11001201020,
 	title: 'Quiz 1',
 	description:
 		'lorem ipsum dolor sit amet consectetur adipiscing elit amet consectetur adipiscing elit',
-	startDateTime: '2022-01-01',
-	endDateTime: '2022-01-02',
-	quizItems: [
+	isVisible: true,
+	questions: [
 		{
 			id: 1,
 			question: 'Question 1',
-			attachment: null,
+			pictureUrl: null,
 			options: [
 				{
-					option: 'Option 1',
+					id: 1,
+					label: 'Label 1',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 2',
+					id: 2,
+					label: 'Label 2',
 					isCorrect: null,
 				},
 			],
@@ -27,18 +28,21 @@ export const data: IStudentQuiz = {
 		{
 			id: 2,
 			question: 'Question 2',
-			attachment: null,
+			pictureUrl: null,
 			options: [
 				{
-					option: 'Option 1',
+					id: 3,
+					label: 'Label 1',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 2',
+					id: 4,
+					label: 'Label 2',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 3',
+					id: 5,
+					label: 'Label 3',
 					isCorrect: null,
 				},
 			],
@@ -46,18 +50,21 @@ export const data: IStudentQuiz = {
 		{
 			id: 3,
 			question: 'Question 3',
-			attachment: null,
+			pictureUrl: null,
 			options: [
 				{
-					option: 'Option 1',
+					id: 6,
+					label: 'Label 1',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 2',
+					id: 7,
+					label: 'Label 2',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 3',
+					id: 8,
+					label: 'Label 3',
 					isCorrect: null,
 				},
 			],
@@ -65,18 +72,26 @@ export const data: IStudentQuiz = {
 		{
 			id: 4,
 			question: 'Question 4',
-			attachment: null,
+			pictureUrl: null,
 			options: [
 				{
-					option: 'Option 1',
+					id: 9,
+					label: 'Label 1',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 2',
+					id: 10,
+					label: 'Label 4',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 3',
+					id: 11,
+					label: 'Label 2',
+					isCorrect: null,
+				},
+				{
+					id: 12,
+					label: 'Label 3',
 					isCorrect: null,
 				},
 			],
@@ -84,18 +99,21 @@ export const data: IStudentQuiz = {
 		{
 			id: 5,
 			question: 'Question 4',
-			attachment: null,
+			pictureUrl: null,
 			options: [
 				{
-					option: 'Option 1',
+					id: 13,
+					label: 'Label 1',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 2',
+					id: 14,
+					label: 'Label 2',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 3',
+					id: 15,
+					label: 'Label 3',
 					isCorrect: null,
 				},
 			],
@@ -103,18 +121,21 @@ export const data: IStudentQuiz = {
 		{
 			id: 8,
 			question: 'Question 4',
-			attachment: null,
+			pictureUrl: null,
 			options: [
 				{
-					option: 'Option 1',
+					id: 16,
+					label: 'Label 1',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 2',
+					id: 17,
+					label: 'Label 2',
 					isCorrect: null,
 				},
 				{
-					option: 'Option 3',
+					id: 18,
+					label: 'Label 3',
 					isCorrect: null,
 				},
 			],
