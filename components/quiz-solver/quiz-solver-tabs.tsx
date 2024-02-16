@@ -1,64 +1,61 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { IQuestion } from '@/types/question.interface'
-import { Button, Tab, Tabs } from '@nextui-org/react'
-import React from 'react'
+import { IQuestionResultRequest } from '@/types/quiz-result.interface'
+import { Tab, Tabs } from '@nextui-org/react'
+import React, { Key } from 'react'
 import { QuizSolverTabItem } from './quiz-solver-tab-item'
 
 interface QuizSolverTabsProps {
 	data: IQuestion[]
+	currentTab: Key
+	setCurrentTab: React.Dispatch<React.SetStateAction<Key>>
 }
 
-export const QuizSolverTabs: React.FC<QuizSolverTabsProps> = ({ data }) => {
-	const [selected, setSelected] = React.useState('1')
+export const QuizSolverTabs: React.FC<QuizSolverTabsProps> = ({
+	data,
+	currentTab,
+	setCurrentTab,
+}) => {
+	const [selectedOptions, setSelectedOptions] = React.useState<
+		IQuestionResultRequest[]
+	>([])
 
-	const isSelectedFirstTab = selected === '1'
-	const isSelectedLastTab = selected === data.length.toString()
-
-	const handlePrev = () => {
-		if (isSelectedFirstTab) return
-		setSelected((prev) => String(Number(prev) - 1))
+	const isQuestionSolved = (questionId: number) => {
+		return selectedOptions.some((option) => option.questionId === questionId)
 	}
 
-	const handleNext = () => {
-		if (isSelectedLastTab) return
-		setSelected((prev) => String(Number(prev) + 1))
-	}
 	return (
 		<>
 			<Tabs
-				selectedKey={selected}
-				onSelectionChange={setSelected}
+				selectedKey={currentTab}
+				onSelectionChange={setCurrentTab}
 				color='primary'
 				className='justify-center'
+				size='lg'
 			>
 				{data.map((quizItem, index) => (
 					<Tab
 						key={index + 1}
-						title={String(index + 1)}
+						title={
+							<div
+								className={cn('flex items-center justify-center', {
+									'font-bold text-success': isQuestionSolved(quizItem.id),
+								})}
+							>
+								{String(index + 1)}
+							</div>
+						}
 					>
-						<QuizSolverTabItem data={quizItem} />
+						<QuizSolverTabItem
+							selectedOptions={selectedOptions}
+							setSelectedOptions={setSelectedOptions}
+							data={quizItem}
+						/>
 					</Tab>
 				))}
 			</Tabs>
-			<div className='flex justify-between'>
-				<Button
-					color='primary'
-					variant='flat'
-					onClick={handlePrev}
-					isDisabled={isSelectedFirstTab}
-				>
-					Prev
-				</Button>
-				<Button
-					color='primary'
-					variant='flat'
-					onClick={handleNext}
-					isDisabled={isSelectedLastTab}
-				>
-					Next
-				</Button>
-			</div>
 		</>
 	)
 }

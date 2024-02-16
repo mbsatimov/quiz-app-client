@@ -11,132 +11,135 @@ export const data: IQuiz = {
 		{
 			id: 1,
 			question: 'Question 1',
-			pictureUrl: null,
+			pictureUrl: undefined,
 			options: [
 				{
 					id: 1,
 					label: 'Label 1',
-					isCorrect: null,
+					isCorrect: false,
 				},
 				{
 					id: 2,
 					label: 'Label 2',
-					isCorrect: null,
+					isCorrect: true,
 				},
 			],
 		},
 		{
 			id: 2,
 			question: 'Question 2',
-			pictureUrl: null,
+			pictureUrl: undefined,
 			options: [
 				{
 					id: 3,
 					label: 'Label 1',
-					isCorrect: null,
+					isCorrect: false,
 				},
 				{
 					id: 4,
 					label: 'Label 2',
-					isCorrect: null,
+					isCorrect: true,
 				},
 				{
 					id: 5,
 					label: 'Label 3',
-					isCorrect: null,
+					isCorrect: false,
 				},
 			],
 		},
 		{
 			id: 3,
 			question: 'Question 3',
-			pictureUrl: null,
+			pictureUrl: undefined,
 			options: [
 				{
 					id: 6,
 					label: 'Label 1',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 				{
 					id: 7,
 					label: 'Label 2',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 				{
 					id: 8,
 					label: 'Label 3',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 			],
 		},
 		{
 			id: 4,
 			question: 'Question 4',
-			pictureUrl: null,
+			pictureUrl:
+				'https://github.githubassets.com/assets/gh-desktop-7c9388a38509.png',
 			options: [
 				{
 					id: 9,
 					label: 'Label 1',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 				{
 					id: 10,
 					label: 'Label 4',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 				{
 					id: 11,
 					label: 'Label 2',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 				{
 					id: 12,
 					label: 'Label 3',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 			],
 		},
 		{
 			id: 5,
 			question: 'Question 4',
-			pictureUrl: null,
+			pictureUrl:
+				'https://github.githubassets.com/assets/gh-desktop-7c9388a38509.png',
 			options: [
 				{
 					id: 13,
 					label: 'Label 1',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 				{
 					id: 14,
 					label: 'Label 2',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 				{
 					id: 15,
 					label: 'Label 3',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 			],
 		},
 		{
 			id: 8,
 			question: 'Question 4',
-			pictureUrl: null,
+			pictureUrl:
+				'https://github.githubassets.com/assets/gh-desktop-7c9388a38509.png',
 			options: [
 				{
 					id: 16,
 					label: 'Label 1',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 				{
 					id: 17,
 					label: 'Label 2',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 				{
 					id: 18,
 					label: 'Label 3',
-					isCorrect: null,
+					isCorrect: undefined,
 				},
 			],
 		},

@@ -33,7 +33,7 @@ export const CreateQuizSchema = z.object({
 	isVisible: z.boolean().default(false),
 	questions: z.array(
 		z.object({
-			image: ImageSchema,
+			pictureUrl: ImageSchema,
 			question: z.string().refine((val) => val.length > 0),
 			options: z
 				.array(
@@ -49,4 +49,4 @@ export const CreateQuizSchema = z.object({
 	),
 })
 
-export type TCreateQuizSchema = z.infer<typeof CreateQuizSchema>
+export type TCreateQuiz = z.infer<typeof CreateQuizSchema>

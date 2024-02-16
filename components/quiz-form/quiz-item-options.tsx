@@ -1,11 +1,13 @@
-import { TCreateQuizSchema } from '@/lib/validation/quiz-schema'
+'use client'
+
+import { TCreateQuiz } from '@/lib/validation/quiz-schema'
 import { Button, Input, Radio, RadioGroup } from '@nextui-org/react'
 import { Minus, Plus } from 'lucide-react'
 import React from 'react'
 import { Controller, UseFormReturn, useFieldArray } from 'react-hook-form'
 
 interface QuizItemOptionsProps {
-	form: UseFormReturn<TCreateQuizSchema>
+	form: UseFormReturn<TCreateQuiz>
 	itemIndex: number
 }
 
@@ -25,6 +27,12 @@ export const QuizItemOptions: React.FC<QuizItemOptionsProps> = ({
 			<RadioGroup
 				isInvalid={errors?.root?.message ? true : false}
 				errorMessage={errors?.root?.message}
+				defaultValue={form
+					.getValues()
+					.questions[itemIndex].options.findIndex(
+						(option) => option.isCorrect === true,
+					)
+					.toString()}
 			>
 				{fields.map((field, index) => (
 					<div
@@ -37,6 +45,10 @@ export const QuizItemOptions: React.FC<QuizItemOptionsProps> = ({
 							render={({ field }) => (
 								<Radio
 									value={String(index)}
+									defaultChecked={
+										form.getValues().questions[itemIndex].options[index]
+											.isCorrect
+									}
 									onChange={(e) => {
 										form
 											.getValues()
@@ -50,7 +62,7 @@ export const QuizItemOptions: React.FC<QuizItemOptionsProps> = ({
 							)}
 						/>
 						<Controller
-							name={`questions.${itemIndex}.options.${index}.option`}
+							name={`questions.${itemIndex}.options.${index}.label`}
 							control={form.control}
 							render={({ field }) => (
 								<Input
@@ -58,9 +70,12 @@ export const QuizItemOptions: React.FC<QuizItemOptionsProps> = ({
 									color='primary'
 									labelPlacement='outside'
 									{...field}
-									isInvalid={errors?.[index]?.option ? true : false}
+									defaultValue={
+										form.getValues().questions[itemIndex].options[index].label
+									}
+									isInvalid={errors?.[index]?.label ? true : false}
 									placeholder={`Option ${index + 1}`}
-									errorMessage={errors?.[index]?.option && 'Option is required'}
+									errorMessage={errors?.[index]?.label && 'Option is required'}
 								/>
 							)}
 						/>

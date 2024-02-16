@@ -1,5 +1,5 @@
 import { IQuizPreview } from '@/types/quiz.interface'
-import { TeacherQuizItem } from './teacher-quiz-item'
+import { StudentQuizItem } from './student-quiz-item'
 
 const data: IQuizPreview[] = [
 	{
@@ -18,13 +18,17 @@ const data: IQuizPreview[] = [
 	},
 ]
 
-export const TeacherQuizList = () => {
+interface StudentQuizListProps {
+	quizId: number
+}
+
+export const StudentQuizList: React.FC<StudentQuizListProps> = ({ quizId }) => {
 	return (
 		<div className='space-y-4'>
 			{data.map((quiz) => (
-				<TeacherQuizItem
+				<StudentQuizItem
 					key={quiz.id}
-					teacherQuizItem={quiz}
+					studentQuizItem={quiz}
 				/>
 			))}
 		</div>

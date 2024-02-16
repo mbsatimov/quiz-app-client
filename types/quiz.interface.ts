@@ -11,10 +11,6 @@ export interface IQuiz {
 
 export interface IQuizPreview extends Omit<IQuiz, 'questions'> {}
 
-export interface ICreateQuiz {
-	title: string
-	description: string | null
-	isVisible: boolean
-	duration: number
+export interface ICreateQuiz extends Omit<IQuiz, 'id' | 'questions'> {
 	questions: ICreateQuestion[]
 }

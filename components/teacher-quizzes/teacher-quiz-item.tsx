@@ -1,6 +1,7 @@
 'use client'
 
 import { PAGES } from '@/const/routes'
+import { useDeleteQuiz } from '@/hooks/use-quiz'
 import { IQuizPreview } from '@/types/quiz.interface'
 import {
 	Button,
@@ -13,8 +14,7 @@ import {
 	DropdownTrigger,
 	Link,
 } from '@nextui-org/react'
-import { format } from 'date-fns'
-import { Edit, MoreHorizontal, Trash, View } from 'lucide-react'
+import { Edit, MoreHorizontal, Trash } from 'lucide-react'
 import React from 'react'
 
 interface TeacherQuizItemProps {
@@ -24,29 +24,31 @@ interface TeacherQuizItemProps {
 export const TeacherQuizItem: React.FC<TeacherQuizItemProps> = ({
 	teacherQuizItem: teacherQuizItem,
 }) => {
+	const deleteQuiz = useDeleteQuiz()
+
+	const handleDelete = () => {
+		deleteQuiz.mutate(teacherQuizItem.id)
+	}
+
 	return (
 		<Card shadow='sm'>
 			<CardHeader className='justify-between'>
 				<h3 className='text-lg font-semibold'>{teacherQuizItem.title}</h3>
 				<Dropdown placement='bottom-end'>
 					<DropdownTrigger>
-						<Button variant='light' isIconOnly size='sm'>
+						<Button
+							variant='light'
+							isIconOnly
+							size='sm'
+						>
 							<MoreHorizontal />
 						</Button>
 					</DropdownTrigger>
-					<DropdownMenu
-						aria-label='Action event example'
-						onAction={(key) => alert(key)}
-					>
+					<DropdownMenu>
 						<DropdownItem
-							key='demo'
-							aria-label='Dropdown menu with icons'
-							startContent={<View size={18} />}
-						>
-							Demonstrate
-						</DropdownItem>
-						<DropdownItem
-							key='new'
+							key='edit'
+							as={Link}
+							href={`${PAGES.EDIT_QUIZ}/${teacherQuizItem.id}`}
 							aria-label='Dropdown menu with icons'
 							startContent={<Edit size={18} />}
 						>
@@ -54,10 +56,10 @@ export const TeacherQuizItem: React.FC<TeacherQuizItemProps> = ({
 						</DropdownItem>
 						<DropdownItem
 							key='delete'
-							aria-label='Dropdown menu with icons'
 							startContent={<Trash size={18} />}
 							className='text-danger'
 							color='danger'
+							onPress={handleDelete}
 						>
 							Delete quiz
 						</DropdownItem>
@@ -65,29 +67,18 @@ export const TeacherQuizItem: React.FC<TeacherQuizItemProps> = ({
 				</Dropdown>
 			</CardHeader>
 			<CardBody>
-				<div className='flex justify-between items-end'>
+				<div className='flex items-end justify-between'>
 					<div>
-						<div>Duration: {teacherQuizItem.duration} min</div>
-						<span className='text-sm'>
-							{format(
-								new Date(teacherQuizItem.startDateTime),
-								'dd MMM yyyy HH:mm'
-							)}
-							{' - '}
-							{format(
-								new Date(teacherQuizItem.endDateTime),
-								'dd MMM yyyy HH:mm'
-							)}
-						</span>
+						<p className='text-default-500'>{teacherQuizItem.description}</p>
 					</div>
 					<div>
 						<Button
 							href={PAGES.QUIZZES}
 							as={Link}
-							color='primary'
+							color='success'
 							variant='flat'
 						>
-							Student results
+							Start Quiz
 						</Button>
 					</div>
 				</div>

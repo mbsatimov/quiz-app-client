@@ -8,24 +8,45 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@nextui-org/button'
 import { Divider } from '@nextui-org/divider'
 import { toast } from 'sonner'
+import { data } from '@/app/s/[quizId]/data'
 import { QuizDetailsFields } from './quiz-details-fields'
 import { QuizItemFields } from './quiz-item-fields'
 
-export const CreateQuizForm = () => {
+interface EditQuizFormProps {
+	quizId: number
+}
+
+export const EditQuizForm: React.FC<EditQuizFormProps> = ({ quizId }) => {
+	// const quiz = useGetQuizById(quizId)
+	const quiz = {
+		data,
+	}
+	// const updateQuiz = useUpdateQuiz(quizId)
+	console.log(quiz.data)
 	const form = useForm<TCreateQuiz>({
 		resolver: zodResolver(CreateQuizSchema),
 		defaultValues: {
-			questions: [
-				{
-					question: '',
-					options: [
-						{ isCorrect: false, label: '' },
-						{ isCorrect: false, label: '' },
-					],
-				},
-			],
+			title: 'sldkfjsdlkjfldlsldkfsdjl',
+			description: 'quiz.data.description || ',
+			isVisible: quiz.data.isVisible,
+			questions:
+				quiz.data?.questions.map((question) => {
+					const { id, ...rest } = question
+					const options = rest.options.map((option) => {
+						const { id, ...rest } = option
+						return rest
+					})
+					return {
+						...rest,
+						options,
+					}
+				}) || [],
 		},
 	})
+
+	// if (quiz.isLoading) return <Loader2 className='h-6 w-6 animate-spin' />
+
+	// if (!quiz.isSuccess) return <div>Something went wrong. Please try again</div>
 
 	const onSubmit = (data: TCreateQuiz) => {
 		console.log(data)
@@ -41,7 +62,7 @@ export const CreateQuizForm = () => {
 		>
 			<QuizDetailsFields
 				errors={form.formState.errors}
-				register={form.register}
+				form={form}
 			/>
 			<Divider className='my-4 bg-blue-500' />
 			<QuizItemFields form={form} />
@@ -54,7 +75,7 @@ export const CreateQuizForm = () => {
 				className='w-full'
 				onPress={realisticConfetti}
 			>
-				Create Quiz
+				Edit Quiz
 			</Button>
 		</form>
 	)

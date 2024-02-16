@@ -1,28 +1,28 @@
 'use client'
 
-import { TCreateQuizSchema } from '@/lib/validation/quiz-schema'
+import { TCreateQuiz } from '@/lib/validation/quiz-schema'
 import { Button, Image } from '@nextui-org/react'
 import { X } from 'lucide-react'
 import { useDropzone } from 'react-dropzone'
 import { UseFormReturn } from 'react-hook-form'
 
 interface ImageFieldProps {
-	form: UseFormReturn<TCreateQuizSchema>
+	form: UseFormReturn<TCreateQuiz>
 	itemIndex: number
 }
 
 export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
-	const image = form.watch(`quizItems.${itemIndex}.image`)
+	const pictureUrl = form.watch(`questions.${itemIndex}.pictureUrl`)
 
 	const { getRootProps, getInputProps } = useDropzone({
 		onDrop: (acceptedFiles) => {
-			form.setValue(`quizItems.${itemIndex}.image`, acceptedFiles[0])
+			form.setValue(`questions.${itemIndex}.pictureUrl`, acceptedFiles[0])
 		},
 	})
 	return (
 		<div
 			{...getRootProps()}
-			className='group/image relative cursor-pointer border-3 border-dashed rounded-md flex items-center justify-center min-h-[100px] w-full'
+			className='group/image relative flex min-h-[100px] w-full cursor-pointer items-center justify-center rounded-md border-3 border-dashed'
 		>
 			<input
 				{...getInputProps({
@@ -31,25 +31,31 @@ export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
 			/>
 
 			<div className='cursor-pointer'>
-				{image ? (
+				{pictureUrl ? (
 					<Image
-						src={URL.createObjectURL(image)}
+						src={
+							typeof pictureUrl === 'string'
+								? pictureUrl
+								: URL.createObjectURL(pictureUrl)
+						}
 						alt='Uploaded image'
 						className='max-h-80 max-w-full object-contain'
 					/>
 				) : (
 					<p>Drag and drop image here or click to browse.</p>
 				)}
-				{image ? (
+				{pictureUrl ? (
 					<Button
-						className='group-hover/image:opacity-100 md:opacity-0 group-hover/image:visible md:invisible absolute -right-2 -top-2 w-4'
+						className='absolute -right-2 -top-2 w-4 group-hover/image:visible group-hover/image:opacity-100 md:invisible md:opacity-0'
 						radius='full'
 						size='sm'
 						variant='flat'
 						color='danger'
 						isIconOnly
 						type='button'
-						onClick={() => form.setValue(`quizItems.${itemIndex}.image`, null)}
+						onClick={() =>
+							form.setValue(`questions.${itemIndex}.pictureUrl`, null)
+						}
 					>
 						<X size={16} />
 					</Button>

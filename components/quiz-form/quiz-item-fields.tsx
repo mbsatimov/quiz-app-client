@@ -1,4 +1,6 @@
-import { TCreateQuizSchema } from '@/lib/validation/quiz-schema'
+'use client'
+
+import { TCreateQuiz } from '@/lib/validation/quiz-schema'
 import { Button, Card, CardBody, Input } from '@nextui-org/react'
 import { Plus } from 'lucide-react'
 import { Controller, UseFormReturn, useFieldArray } from 'react-hook-form'
@@ -6,10 +8,10 @@ import { ImageField } from './image-field'
 import { QuizItemOptions } from './quiz-item-options'
 
 interface QuizItemFieldsProps {
-	form: UseFormReturn<TCreateQuizSchema>
+	form: UseFormReturn<TCreateQuiz>
 }
 
-const defaultQuizItem: TCreateQuizSchema['questions'][0] = {
+const defaultQuizItem: TCreateQuiz['questions'][0] = {
 	question: '',
 	options: [
 		{ isCorrect: false, label: '' },
@@ -51,6 +53,7 @@ export const QuizItemFields: React.FC<QuizItemFieldsProps> = ({ form }) => {
 										labelPlacement={'outside'}
 										label={`Question ${index + 1}`}
 										{...field}
+										defaultValue={form.getValues().questions[index].question}
 										isInvalid={errors?.[index]?.question ? true : false}
 										errorMessage={
 											errors?.[index]?.question && 'Question is required'

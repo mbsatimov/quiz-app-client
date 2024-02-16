@@ -1,5 +1,4 @@
 import { QuizSolverContent } from '@/components/quiz-solver/quiz-solver-content'
-import { QuizSolverHeader } from '@/components/quiz-solver/quiz-solver-header'
 import { data } from './data'
 
 export default function StudentQuizPage({
@@ -8,9 +7,11 @@ export default function StudentQuizPage({
 	params: { quizId: string }
 }) {
 	return (
-		<div className='mx-auto flex h-full max-w-2xl flex-col'>
-			<QuizSolverHeader data={data} />
-			<QuizSolverContent data={data} />
+		<div className='mx-auto h-screen max-w-2xl px-4 py-6 md:py-8'>
+			<QuizSolverContent
+				quizId={Number(params.quizId)}
+				data={data}
+			/>
 		</div>
 	)
 }
