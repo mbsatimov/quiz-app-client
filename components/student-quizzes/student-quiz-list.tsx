@@ -6,14 +6,12 @@ const data: IQuizPreview[] = [
 		id: 1,
 		title: 'English 1',
 		isVisible: true,
-		duration: 60,
 		description: 'lorem ipsum dolor sit amet consectetur adipiscing elit',
 	},
 	{
 		id: 2,
 		title: 'English 2',
 		isVisible: true,
-		duration: 60,
 		description: 'lorem ipsum dolor sit amet consectetur adipiscing elit',
 	},
 ]

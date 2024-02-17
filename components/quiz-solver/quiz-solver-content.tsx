@@ -94,7 +94,8 @@ export const QuizSolverContent: React.FC<QuizSolverContentProps> = ({
 									<Button
 										color='danger'
 										as={Link}
-										href={`${PAGES.STUDENT_QUIZZES}/${data.id}/${PAGES.STUDENT_QUIZ_RESULTS}`}
+										//todo
+										href={`${PAGES.STUDENT_QUIZZES}/${quizId}/${PAGES.STUDENT_QUIZ_RESULTS}`}
 									>
 										See Result
 									</Button>

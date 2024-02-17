@@ -69,7 +69,7 @@ export const QuizItemFields: React.FC<QuizItemFieldsProps> = ({ form }) => {
 						</CardBody>
 					</Card>
 					<Button
-						className='absolute -top-5 right-1/2 translate-x-1/2 group-hover:visible group-hover:opacity-100 md:invisible md:opacity-0'
+						className='absolute bottom-2 right-1/2 translate-x-1/2 group-hover:visible group-hover:opacity-100 md:invisible md:opacity-0'
 						radius='full'
 						size='sm'
 						variant='flat'
@@ -92,6 +92,10 @@ export const QuizItemFields: React.FC<QuizItemFieldsProps> = ({ form }) => {
 			>
 				Add question
 			</Button>
+			{form.formState.errors.questions &&
+				form.getValues().questions.length === 0 && (
+					<p className='text-center text-danger'>{errors?.root?.message}</p>
+				)}
 		</div>
 	)
 }

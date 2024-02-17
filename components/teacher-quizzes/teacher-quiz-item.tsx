@@ -73,7 +73,7 @@ export const TeacherQuizItem: React.FC<TeacherQuizItemProps> = ({
 					</div>
 					<div>
 						<Button
-							href={PAGES.QUIZZES}
+							href={`${PAGES.QUIZZES}/${teacherQuizItem.id}`}
 							as={Link}
 							color='success'
 							variant='flat'

@@ -27,26 +27,27 @@ export const ImageSchema = z
 export const CreateQuizSchema = z.object({
 	title: z.string().refine((val) => val.length > 0),
 	description: z.string().optional(),
-	duration: z.string().refine((val) => val > '0', {
-		message: 'Invalid duration',
-	}),
 	isVisible: z.boolean().default(false),
-	questions: z.array(
-		z.object({
-			pictureUrl: ImageSchema,
-			question: z.string().refine((val) => val.length > 0),
-			options: z
-				.array(
-					z.object({
-						label: z.string().refine((val) => val.length > 0),
-						isCorrect: z.boolean(),
+	questions: z
+		.array(
+			z.object({
+				pictureUrl: ImageSchema,
+				question: z.string().refine((val) => val.length > 0),
+				options: z
+					.array(
+						z.object({
+							label: z.string().refine((val) => val.length > 0),
+							isCorrect: z.boolean(),
+						}),
+					)
+					.refine((val) => val.some((item) => item.isCorrect), {
+						message: 'At least one option must be selected.',
 					}),
-				)
-				.refine((val) => val.some((item) => item.isCorrect), {
-					message: 'At least one option must be selected.',
-				}),
+			}),
+		)
+		.refine((val) => val.length > 0, {
+			message: 'At least one question is required.',
 		}),
-	),
 })
 
 export type TCreateQuiz = z.infer<typeof CreateQuizSchema>

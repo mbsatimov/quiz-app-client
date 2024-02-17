@@ -30,6 +30,7 @@ export const CreateQuizForm = () => {
 	const onSubmit = (data: TCreateQuiz) => {
 		console.log(data)
 		toast.success('Quiz created successfully')
+		realisticConfetti()
 	}
 
 	console.log(form.getValues())
@@ -41,7 +42,7 @@ export const CreateQuizForm = () => {
 		>
 			<QuizDetailsFields
 				errors={form.formState.errors}
-				register={form.register}
+				form={form}
 			/>
 			<Divider className='my-4 bg-blue-500' />
 			<QuizItemFields form={form} />
@@ -52,7 +53,6 @@ export const CreateQuizForm = () => {
 				size='lg'
 				variant='shadow'
 				className='w-full'
-				onPress={realisticConfetti}
 			>
 				Create Quiz
 			</Button>

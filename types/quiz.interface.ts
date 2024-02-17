@@ -5,7 +5,6 @@ export interface IQuiz {
 	title: string
 	description: string | null
 	isVisible: boolean
-	duration: number
 	questions: IQuestion[]
 }
 

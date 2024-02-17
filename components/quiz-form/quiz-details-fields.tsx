@@ -34,19 +34,6 @@ export const QuizDetailsFields: React.FC<QuizDetailsFieldsProps> = ({
 				defaultValue={form.getValues().description}
 				isInvalid={errors.description ? true : false}
 			/>
-			<Input
-				{...form.register('duration')}
-				defaultValue={form.getValues().duration}
-				color='primary'
-				min={1}
-				labelPlacement={'outside'}
-				isInvalid={errors.duration ? true : false}
-				errorMessage={errors.duration && errors.duration.message}
-				label='Duration'
-				type='number'
-				inputMode='numeric'
-				placeholder='Minutes'
-			/>
 		</>
 	)
 }
