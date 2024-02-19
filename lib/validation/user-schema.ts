@@ -4,7 +4,7 @@ export const CreateUserSchema = z
 	.object({
 		firstname: z.string().refine((val) => val.length > 0),
 		lastname: z.string().refine((val) => val.length > 0),
-		login: z.string().refine((val) => val.length > 0),
+		username: z.string().refine((val) => val.length > 0),
 		password: z
 			.string()
 			.min(8, { message: 'Password must be at least 8 characters.' })

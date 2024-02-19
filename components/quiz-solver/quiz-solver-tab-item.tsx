@@ -55,7 +55,7 @@ export const QuizSolverTabItem: React.FC<QuizSolverProps> = ({
 			<p className='text-center text-2xl font-bold md:text-3xl'>
 				{data.question}
 			</p>
-			{data.pictureUrl && (
+			{data.picture && (
 				<div className='flex justify-center'>
 					<Image
 						src={

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { EnumTokens } from './services/auth.service'
-import { IUser } from './types/user.interface'
+import { EnumRole, IUser } from './types/user.interface'
 
 export function middleware(req: NextRequest) {
 	const { pathname } = req.nextUrl
@@ -17,18 +17,25 @@ export function middleware(req: NextRequest) {
 		req.cookies.get(EnumTokens.REFRESH_TOKEN) &&
 		currentUser
 
-	// if (isAuthenticated) {
-	// 	if (isLoginPage) {
-	// 		return NextResponse.redirect(new URL('/t', req.url))
-	// 	}
-	// } else {
-	// 	if (isLoginPage) {
-	// 		return NextResponse.next()
-	// 	}
-	// 	return NextResponse.redirect(new URL('/auth/login', req.url))
-	// }
+	if (isAuthenticated) {
+		if (isLoginPage) {
+			return NextResponse.redirect(new URL('/t', req.url))
+		}
+
+		if (
+			pathname === '/t/users' &&
+			currentUser.role !== EnumRole.SUPER_TEACHER
+		) {
+			return NextResponse.redirect(new URL('/404', req.url))
+		}
+	} else {
+		if (isLoginPage) {
+			return NextResponse.next()
+		}
+		return NextResponse.redirect(new URL('/auth/login', req.url))
+	}
 }
 
-// export const config = {
-// 	matcher: ['/t/:path*', '/auth/:path*'],
-// }
+export const config = {
+	matcher: ['/t/:path*', '/auth/:path*'],
+}

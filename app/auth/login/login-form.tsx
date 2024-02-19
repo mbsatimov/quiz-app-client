@@ -22,7 +22,7 @@ export const LoginForm = () => {
 	const form = useForm<TLogin>({
 		resolver: zodResolver(LoginSchema),
 		defaultValues: {
-			login: '',
+			username: '',
 			password: '',
 		},
 	})
@@ -44,13 +44,13 @@ export const LoginForm = () => {
 				</CardHeader>
 				<CardBody className='space-y-8'>
 					<Input
-						{...form.register('login')}
+						{...form.register('username')}
 						color='primary'
-						label='Login'
-						placeholder='Enter your login'
-						isInvalid={!!errors.login}
-						defaultValue={form.getValues().login}
-						errorMessage={errors.login?.message}
+						label='Username'
+						placeholder='Enter your username'
+						isInvalid={!!errors.username}
+						defaultValue={form.getValues().username}
+						errorMessage={errors.username?.message}
 					/>
 					<Input
 						{...form.register('password')}

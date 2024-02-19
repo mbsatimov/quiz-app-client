@@ -22,7 +22,7 @@ export const CreateQuizSchema = z.object({
 	questions: z
 		.array(
 			z.object({
-				pictureUrl: z.custom<File>().nullable(),
+				picture: z.custom<File | string>().nullable(),
 				question: z.string().refine((val) => val.length > 0),
 				options: z
 					.array(

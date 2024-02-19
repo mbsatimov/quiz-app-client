@@ -7,9 +7,9 @@ const nextConfig = {
 	images: {
 		remotePatterns: [
 			{
-				protocol: 'https',
-				hostname: 'avatars.githubusercontent.com',
-				port: '',
+				protocol: 'http',
+				hostname: 'localhost',
+				port: '8080',
 				pathname: '/**',
 			},
 		],

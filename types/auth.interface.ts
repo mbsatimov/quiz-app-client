@@ -7,6 +7,6 @@ export interface IAuthResponse {
 }
 
 export interface ILoginRequest {
-	login: string
+	username: string
 	password: string
 }

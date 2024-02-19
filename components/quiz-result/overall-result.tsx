@@ -1,11 +1,12 @@
 'use client'
 
+import { IQuestion } from '@/types/question.interface'
 import { IQuestionResult } from '@/types/quiz-result.interface'
 import { IQuiz } from '@/types/quiz.interface'
 import { Progress } from '@nextui-org/react'
 
 interface OverallResultProps {
-	data: IQuiz
+	data: IQuestion[]
 	selectedOptions: IQuestionResult[]
 }
 
@@ -18,7 +19,7 @@ export const OverallResult: React.FC<OverallResultProps> = ({
 			?.answerId
 	}
 
-	const correct = data.questions
+	const correct = data
 		.map(
 			(result) =>
 				getQuestionAnswer(result.id) ===
@@ -26,7 +27,7 @@ export const OverallResult: React.FC<OverallResultProps> = ({
 		)
 		.filter(Boolean).length
 
-	const count = data.questions.length
+	const count = data.length
 
 	const percentage = Math.round((correct / count) * 100)
 

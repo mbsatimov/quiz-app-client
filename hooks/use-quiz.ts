@@ -16,12 +16,44 @@ export const useGetAllQuizzes = () => {
 	})
 }
 
+export const useGetAllQuizzesOfCurrentTeacher = () => {
+	return useQuery({
+		queryKey: [QUIZ_QUERY_KEY, 'teacher'],
+		queryFn: QuizService.getAllOfCurrentTeacher,
+		select: (data) => data.data,
+	})
+}
+
+export const useGetAllVisibleQuizzes = () => {
+	return useQuery({
+		queryKey: [QUIZ_QUERY_KEY, { isVisible: true }],
+		queryFn: QuizService.getAllVisible,
+		select: (data) => data.data,
+	})
+}
+
 export const useGetQuizById = (id: number) => {
 	return useQuery({
 		queryKey: [QUIZ_QUERY_KEY, id],
 		queryFn: () => QuizService.getById(id),
 		select: (data) => data.data,
+	})
+}
+
+export const useGetQuizQuestionsById = (id: number) => {
+	return useQuery({
+		queryKey: [QUIZ_QUERY_KEY, id],
+		queryFn: () => QuizService.getQuestionsById(id),
+		select: (data) => data.data,
 		enabled: !!id,
+	})
+}
+
+export const useGetVisibleQuizzesByTeacherId = (teacherId: number) => {
+	return useQuery({
+		queryKey: [QUIZ_QUERY_KEY, { teacherId }],
+		queryFn: () => QuizService.getVisibleByTeacherId(teacherId),
+		select: (data) => data.data,
 	})
 }
 

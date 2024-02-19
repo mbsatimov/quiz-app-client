@@ -24,7 +24,7 @@ export const CreateUserForm = () => {
 		defaultValues: {
 			firstname: '',
 			lastname: '',
-			login: '',
+			username: '',
 			password: '',
 		},
 	})

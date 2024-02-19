@@ -12,11 +12,11 @@ interface ImageFieldProps {
 }
 
 export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
-	const pictureUrl = form.watch(`questions.${itemIndex}.pictureUrl`)
+	const picture = form.watch(`questions.${itemIndex}.picture`)
 
 	const { getRootProps, getInputProps } = useDropzone({
 		onDrop: (acceptedFiles) => {
-			form.setValue(`questions.${itemIndex}.pictureUrl`, acceptedFiles[0])
+			form.setValue(`questions.${itemIndex}.picture`, acceptedFiles[0])
 		},
 		accept: {
 			'image/png': ['.png', '.jpg', '.jpeg', '.webp', '.avif'],
@@ -31,12 +31,12 @@ export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
 			<input {...getInputProps()} />
 
 			<div className='cursor-pointer'>
-				{pictureUrl ? (
+				{picture ? (
 					<Image
 						src={
-							typeof pictureUrl === 'string'
-								? pictureUrl
-								: URL.createObjectURL(pictureUrl)
+							typeof picture === 'string'
+								? picture
+								: URL.createObjectURL(picture)
 						}
 						alt='Uploaded image'
 						className='max-h-80 max-w-full object-contain'
@@ -44,7 +44,7 @@ export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
 				) : (
 					<p>Drag and drop image here or click to browse.</p>
 				)}
-				{pictureUrl ? (
+				{picture ? (
 					<Button
 						className='absolute -right-2 -top-2 z-20 w-4 group-hover/image:visible group-hover/image:opacity-100 md:invisible md:opacity-0'
 						radius='full'
@@ -54,7 +54,7 @@ export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
 						isIconOnly
 						type='button'
 						onClick={() =>
-							form.setValue(`questions.${itemIndex}.pictureUrl`, null)
+							form.setValue(`questions.${itemIndex}.picture`, null)
 						}
 					>
 						<X size={16} />

@@ -23,7 +23,7 @@ const AUTH_URL = '/auth'
 export const AuthService = {
 	async login(data: ILoginRequest): Promise<AxiosResponse<IAuthResponse>> {
 		const response = await $apiAuth.post<IAuthResponse>(
-			`${AUTH_URL}/authenticate`,
+			`${AUTH_URL}/login`,
 			data,
 		)
 

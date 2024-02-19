@@ -30,7 +30,7 @@ export const QuizDetailsFields: React.FC<QuizDetailsFieldsProps> = ({
 				labelPlacement='outside'
 				placeholder='Enter your description'
 				{...form.register('description')}
-				defaultValue={form.getValues().description}
+				defaultValue={form.getValues().description || ''}
 				isInvalid={errors.description ? true : false}
 			/>
 		</>

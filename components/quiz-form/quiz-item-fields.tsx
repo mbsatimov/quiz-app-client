@@ -13,6 +13,7 @@ interface QuizItemFieldsProps {
 
 const defaultQuizItem: TCreateQuiz['questions'][0] = {
 	question: '',
+	picture: null,
 	options: [
 		{ isCorrect: false, label: '' },
 		{ isCorrect: false, label: '' },

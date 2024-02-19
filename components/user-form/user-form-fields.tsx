@@ -34,13 +34,13 @@ export const UserFormFields: React.FC<UserFormFieldsProps> = ({ form }) => {
 				errorMessage={errors.lastname?.message}
 			/>
 			<Input
-				{...form.register('login')}
+				{...form.register('username')}
 				color='primary'
-				label='Login'
+				label='Username'
 				labelPlacement='outside'
-				isInvalid={!!errors.login}
-				defaultValue={form.getValues().login}
-				errorMessage={errors.login?.message}
+				isInvalid={!!errors.username}
+				defaultValue={form.getValues().username}
+				errorMessage={errors.username?.message}
 			/>
 			<Input
 				{...form.register('password')}

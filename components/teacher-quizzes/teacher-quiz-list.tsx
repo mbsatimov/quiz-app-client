@@ -1,25 +1,24 @@
-import { IQuizPreview } from '@/types/quiz.interface'
+'use client'
+
+import { useGetAllQuizzesOfCurrentTeacher } from '@/hooks/use-quiz'
+import { Loader2 } from 'lucide-react'
 import { TeacherQuizItem } from './teacher-quiz-item'
 
-const data: IQuizPreview[] = [
-	{
-		id: 1,
-		title: 'English 1',
-		isVisible: true,
-		description: 'lorem ipsum dolor sit amet consectetur adipiscing elit',
-	},
-	{
-		id: 2,
-		title: 'English 2',
-		isVisible: false,
-		description: 'lorem ipsum dolor sit amet consectetur adipiscing elit',
-	},
-]
-
 export const TeacherQuizList = () => {
+	const quizzes = useGetAllQuizzesOfCurrentTeacher()
+
+	if (quizzes.isLoading) return <Loader2 className='h-6 w-6 animate-spin' />
+
+	if (!quizzes.isSuccess)
+		return (
+			<div className='text-center text-xl text-danger'>
+				Something went wrong. Please try again
+			</div>
+		)
+
 	return (
 		<div className='space-y-4'>
-			{data.map((quiz) => (
+			{quizzes.data.map((quiz) => (
 				<TeacherQuizItem
 					key={quiz.id}
 					teacherQuizItem={quiz}

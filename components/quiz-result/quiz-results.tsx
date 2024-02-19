@@ -8,9 +8,10 @@ import { usePathname } from 'next/navigation'
 import React from 'react'
 import { DetailedResult } from './detailed-results'
 import { OverallResult } from './overall-result'
+import { IQuestion } from '@/types/question.interface'
 
 interface QuizResultsProps {
-	data: IQuiz
+	data: IQuestion[]
 	selectedOptions: IQuestionResult[]
 }
 

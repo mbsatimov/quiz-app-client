@@ -33,7 +33,7 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
 		defaultValues: {
 			firstname: user.firstname,
 			lastname: user.lastname,
-			login: user.login,
+			username: user.username,
 			password: '',
 			confirmPassword: '',
 		},

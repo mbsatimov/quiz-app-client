@@ -1,7 +1,7 @@
 'use client'
 
+import { IQuestion } from '@/types/question.interface'
 import { IQuestionResult } from '@/types/quiz-result.interface'
-import { IQuiz } from '@/types/quiz.interface'
 import {
 	Card,
 	CardBody,
@@ -12,7 +12,7 @@ import {
 import { CustomRadio } from '../ui/custom-radio'
 
 interface DetailedResultProps {
-	data: IQuiz
+	data: IQuestion[]
 	selectedOptions: IQuestionResult[]
 }
 
@@ -27,7 +27,7 @@ export const DetailedResult: React.FC<DetailedResultProps> = ({
 
 	return (
 		<div className='space-y-6'>
-			{data.questions.map((question, index) => {
+			{data.map((question, index) => {
 				const answerId = getQuestionAnswer(question.id)
 				return (
 					<Card
@@ -41,10 +41,10 @@ export const DetailedResult: React.FC<DetailedResultProps> = ({
 							</p>
 						</CardHeader>
 						<CardBody className='space-y-4'>
-							{question.pictureUrl && (
+							{question.picture && (
 								<div className='flex justify-center'>
 									<Image
-										src={question.pictureUrl}
+										src={question.picture}
 										alt='Uploaded image'
 										className=' max-h-[150px] max-w-[300px] object-contain sm:max-h-[320px]'
 									/>

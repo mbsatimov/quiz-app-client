@@ -50,12 +50,12 @@ export const CreateQuizForm = () => {
 		const questionsWithBase64Pictures = await Promise.all(
 			questions.map(async (question) => {
 				let picture: string | null = null
-				if (question.pictureUrl) {
-					picture = (await toBase64(question.pictureUrl)) as string
+				if (question.picture && typeof question.picture !== 'string') {
+					picture = (await toBase64(question.picture)) as string
 				}
 				return {
 					...question,
-					pictureUrl: picture,
+					picture: picture,
 				}
 			}),
 		)

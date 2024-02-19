@@ -1,7 +1,7 @@
 'use client'
 
+import { useGetQuizQuestionsById } from '@/hooks/use-quiz'
 import { IQuestionResult } from '@/types/quiz-result.interface'
-import { IQuiz } from '@/types/quiz.interface'
 import {
 	Button,
 	Modal,
@@ -10,19 +10,20 @@ import {
 	ModalHeader,
 	useDisclosure,
 } from '@nextui-org/react'
+import { Loader2 } from 'lucide-react'
 import React, { Key } from 'react'
 import { QuizResults } from '../quiz-result/quiz-results'
 import { QuizSolverTabs } from './quiz-solver-tabs'
 
 interface QuizSolverContentProps {
 	quizId: number
-	data: IQuiz
 }
 
 export const QuizSolverContent: React.FC<QuizSolverContentProps> = ({
-	data,
 	quizId,
 }) => {
+	const questions = useGetQuizQuestionsById(quizId)
+
 	const [selectedOptions, setSelectedOptions] = React.useState<
 		IQuestionResult[]
 	>([])
@@ -32,8 +33,13 @@ export const QuizSolverContent: React.FC<QuizSolverContentProps> = ({
 	const { isOpen, onOpen, onOpenChange } = useDisclosure()
 	const [currentTab, setCurrentTab] = React.useState<Key>('1')
 
+	if (questions.isLoading) return <Loader2 className='h-6 w-6 animate-spin' />
+
+	if (!questions.isSuccess)
+		return <div>Something went wrong. Please try again</div>
+
 	const isSelectedFirstTab = currentTab === '1'
-	const isSelectedLastTab = currentTab === data.questions.length.toString()
+	const isSelectedLastTab = currentTab === questions.data.length.toString()
 
 	const handlePrev = () => {
 		if (isSelectedFirstTab) return
@@ -49,7 +55,7 @@ export const QuizSolverContent: React.FC<QuizSolverContentProps> = ({
 		<>
 			{isFinished ? (
 				<QuizResults
-					data={data}
+					data={questions.data}
 					selectedOptions={selectedOptions}
 				/>
 			) : (
@@ -57,7 +63,7 @@ export const QuizSolverContent: React.FC<QuizSolverContentProps> = ({
 					<QuizSolverTabs
 						selectedOptions={selectedOptions}
 						setSelectedOptions={setSelectedOptions}
-						data={data.questions}
+						data={questions.data}
 						currentTab={currentTab}
 						setCurrentTab={setCurrentTab}
 					/>
