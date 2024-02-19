@@ -2,16 +2,17 @@
 
 import { useForm } from 'react-hook-form'
 
-import { realisticConfetti } from '@/lib/canvas-confetti'
+import { useCreateQuiz } from '@/hooks/use-quiz'
 import { CreateQuizSchema, TCreateQuiz } from '@/lib/validation/quiz-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@nextui-org/button'
-import { Divider } from '@nextui-org/divider'
-import { toast } from 'sonner'
+
+import { Button, Divider } from '@nextui-org/react'
 import { QuizDetailsFields } from './quiz-details-fields'
 import { QuizItemFields } from './quiz-item-fields'
 
 export const CreateQuizForm = () => {
+	const createQuiz = useCreateQuiz()
+
 	const form = useForm<TCreateQuiz>({
 		resolver: zodResolver(CreateQuizSchema),
 		defaultValues: {
@@ -27,13 +28,40 @@ export const CreateQuizForm = () => {
 		},
 	})
 
-	const onSubmit = (data: TCreateQuiz) => {
-		console.log(data)
-		toast.success('Quiz created successfully')
-		realisticConfetti()
+	const toBase64 = (file: File) => {
+		return new Promise((resolve, reject) => {
+			const fileReader = new FileReader()
+
+			fileReader.readAsDataURL(file)
+
+			fileReader.onload = () => {
+				resolve(fileReader.result)
+			}
+
+			fileReader.onerror = (error) => {
+				reject(error)
+			}
+		})
 	}
 
-	console.log(form.getValues())
+	const onSubmit = async (data: TCreateQuiz) => {
+		const { questions } = data
+
+		const questionsWithBase64Pictures = await Promise.all(
+			questions.map(async (question) => {
+				let picture: string | null = null
+				if (question.pictureUrl) {
+					picture = (await toBase64(question.pictureUrl)) as string
+				}
+				return {
+					...question,
+					pictureUrl: picture,
+				}
+			}),
+		)
+
+		createQuiz.mutate({ ...data, questions: questionsWithBase64Pictures })
+	}
 
 	return (
 		<form
@@ -53,6 +81,7 @@ export const CreateQuizForm = () => {
 				size='lg'
 				variant='shadow'
 				className='w-full'
+				isLoading={createQuiz.isPending}
 			>
 				Create Quiz
 			</Button>

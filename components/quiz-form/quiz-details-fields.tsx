@@ -17,12 +17,11 @@ export const QuizDetailsFields: React.FC<QuizDetailsFieldsProps> = ({
 			<Input
 				color='primary'
 				{...form.register('title', { required: true })}
-				isInvalid={errors.title ? true : false}
+				isInvalid={!!errors.title}
 				defaultValue={form.getValues().title}
-				type='title'
 				label='Title'
 				placeholder='Enter test title'
-				errorMessage={errors.title && 'Title is required'}
+				errorMessage={errors.title?.message}
 				labelPlacement={'outside'}
 			/>
 			<Textarea

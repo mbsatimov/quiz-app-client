@@ -1,20 +1,34 @@
 'use client'
 
-import { useGetOverallResult } from '@/hooks/use-quiz-result'
+import { IQuestionResult } from '@/types/quiz-result.interface'
+import { IQuiz } from '@/types/quiz.interface'
 import { Progress } from '@nextui-org/react'
-import { Loader2 } from 'lucide-react'
 
 interface OverallResultProps {
-	quizId: number
+	data: IQuiz
+	selectedOptions: IQuestionResult[]
 }
 
-export const OverallResult: React.FC<OverallResultProps> = ({ quizId }) => {
-	const overallResults = useGetOverallResult(quizId)
+export const OverallResult: React.FC<OverallResultProps> = ({
+	data,
+	selectedOptions,
+}) => {
+	const getQuestionAnswer = (questionId: number) => {
+		return selectedOptions.find((option) => option.questionId === questionId)
+			?.answerId
+	}
 
-	if (overallResults.isLoading)
-		return <Loader2 className='h-6 w-6 animate-spin' />
+	const correct = data.questions
+		.map(
+			(result) =>
+				getQuestionAnswer(result.id) ===
+				result.options.find((option) => option.isCorrect)?.id,
+		)
+		.filter(Boolean).length
 
-	if (!overallResults.isSuccess) return <p>Something went wrong. Try again!</p>
+	const count = data.questions.length
+
+	const percentage = Math.round((correct / count) * 100)
 
 	return (
 		<Progress
@@ -26,8 +40,8 @@ export const OverallResult: React.FC<OverallResultProps> = ({ quizId }) => {
 				label: 'tracking-wider font-medium text-default-600',
 				value: 'text-foreground/60',
 			}}
-			label={`True answers ${overallResults.data.correct} / ${overallResults.data.count}`}
-			value={overallResults.data.percentage}
+			label={`True answers ${correct} / ${count}`}
+			value={percentage}
 			showValueLabel={true}
 		/>
 	)

@@ -11,7 +11,7 @@ const data: IQuizPreview[] = [
 	{
 		id: 2,
 		title: 'English 2',
-		isVisible: true,
+		isVisible: false,
 		description: 'lorem ipsum dolor sit amet consectetur adipiscing elit',
 	},
 ]

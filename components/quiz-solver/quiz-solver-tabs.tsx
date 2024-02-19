@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import { IQuestion } from '@/types/question.interface'
-import { IQuestionResultRequest } from '@/types/quiz-result.interface'
+import { IQuestionResult } from '@/types/quiz-result.interface'
 import { Tab, Tabs } from '@nextui-org/react'
 import React, { Key } from 'react'
 import { QuizSolverTabItem } from './quiz-solver-tab-item'
@@ -11,17 +11,17 @@ interface QuizSolverTabsProps {
 	data: IQuestion[]
 	currentTab: Key
 	setCurrentTab: React.Dispatch<React.SetStateAction<Key>>
+	selectedOptions: IQuestionResult[]
+	setSelectedOptions: React.Dispatch<React.SetStateAction<IQuestionResult[]>>
 }
 
 export const QuizSolverTabs: React.FC<QuizSolverTabsProps> = ({
 	data,
 	currentTab,
 	setCurrentTab,
+	selectedOptions,
+	setSelectedOptions,
 }) => {
-	const [selectedOptions, setSelectedOptions] = React.useState<
-		IQuestionResultRequest[]
-	>([])
-
 	const isQuestionSolved = (questionId: number) => {
 		return selectedOptions.some((option) => option.questionId === questionId)
 	}

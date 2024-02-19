@@ -15,23 +15,14 @@ const ACCEPTED_IMAGE_TYPES = [
 	'image/webp',
 ]
 
-export const ImageSchema = z
-	.any()
-	.refine((file) => file?.size <= MAX_FILE_SIZE, `Max image size is 2MB.`)
-	.refine(
-		(file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-		'Only .jpg, .jpeg, .png and .webp formats are supported.',
-	)
-	.optional()
-
 export const CreateQuizSchema = z.object({
 	title: z.string().refine((val) => val.length > 0),
-	description: z.string().optional(),
+	description: z.string().nullable(),
 	isVisible: z.boolean().default(false),
 	questions: z
 		.array(
 			z.object({
-				pictureUrl: ImageSchema,
+				pictureUrl: z.custom<File>().nullable(),
 				question: z.string().refine((val) => val.length > 0),
 				options: z
 					.array(

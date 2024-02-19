@@ -1,15 +1,33 @@
-import { getSession } from '@auth0/nextjs-auth0'
-import { redirect } from 'next/navigation'
+import { PAGES } from '@/const/routes'
+import { Button, Link } from '@nextui-org/react'
 
-export default async function MainPage() {
-	const session = await getSession()
-
-	if (session?.user) {
-		redirect('/s')
-	}
+export default function HomePage() {
 	return (
-		<div>
-			<a href='/api/auth/login'>Login</a>
+		<div className='flex h-screen flex-col items-center justify-center'>
+			<div className='mb-4 space-y-2'>
+				<h1 className='text-center text-3xl font-bold'>Welcome to Quiz App</h1>
+				<p className='text-center'>Please, choose your role to start</p>
+			</div>
+			<div className='flex flex-col gap-6 md:flex-row'>
+				<Button
+					as={Link}
+					href={PAGES.TEACHER_QUIZZES}
+					size='lg'
+					variant='flat'
+					color='success'
+				>
+					I am a teacher
+				</Button>
+				<Button
+					as={Link}
+					href={PAGES.STUDENT_QUIZZES}
+					size='lg'
+					variant='flat'
+					color='primary'
+				>
+					I am a student
+				</Button>
+			</div>
 		</div>
 	)
 }

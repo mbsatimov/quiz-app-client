@@ -1,5 +1,13 @@
 import { $apiAuth } from '@/api/interceptor'
-import { getRefreshToken, removeAccessTokenFromStorage, removeCurrentUserFromStorage, removeRefreshTokenFromStorage, saveAccessTokenToStorage, saveCurrentUserToStorage, saveRefreshTokenToStorage } from '@/lib/auth.helper'
+import {
+	getRefreshToken,
+	removeAccessTokenFromStorage,
+	removeCurrentUserFromStorage,
+	removeRefreshTokenFromStorage,
+	saveAccessTokenToStorage,
+	saveCurrentUserToStorage,
+	saveRefreshTokenToStorage,
+} from '@/lib/helpers/auth.helper'
 import { IAuthResponse } from '@/types/auth.interface'
 import { AxiosResponse } from 'axios'
 import { ILoginRequest } from '../types/auth.interface'
@@ -14,7 +22,10 @@ const AUTH_URL = '/auth'
 
 export const AuthService = {
 	async login(data: ILoginRequest): Promise<AxiosResponse<IAuthResponse>> {
-		const response = await $apiAuth.post<IAuthResponse>(`${AUTH_URL}/authenticate`, data)
+		const response = await $apiAuth.post<IAuthResponse>(
+			`${AUTH_URL}/authenticate`,
+			data,
+		)
 
 		if (response.data.accessToken) {
 			saveAccessTokenToStorage(response.data.accessToken)

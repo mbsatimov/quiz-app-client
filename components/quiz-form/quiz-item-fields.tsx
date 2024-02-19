@@ -66,19 +66,17 @@ export const QuizItemFields: React.FC<QuizItemFieldsProps> = ({ form }) => {
 								form={form}
 								itemIndex={index}
 							/>
+							<Button
+								size='sm'
+								variant='flat'
+								color='danger'
+								type='button'
+								onClick={() => remove(index)}
+							>
+								Remove question
+							</Button>
 						</CardBody>
 					</Card>
-					<Button
-						className='absolute bottom-2 right-1/2 translate-x-1/2 group-hover:visible group-hover:opacity-100 md:invisible md:opacity-0'
-						radius='full'
-						size='sm'
-						variant='flat'
-						color='danger'
-						type='button'
-						onClick={() => remove(index)}
-					>
-						Remove question
-					</Button>
 				</div>
 			))}
 			<Button

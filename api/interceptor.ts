@@ -1,5 +1,3 @@
-import { getAccessToken } from '@/lib/auth.helper'
-import { AuthService } from '@/services/auth.service'
 import axios, { CreateAxiosDefaults } from 'axios'
 
 export const API_URL = process.env.API_URL

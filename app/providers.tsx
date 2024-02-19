@@ -4,7 +4,6 @@ import { NextUIProvider } from '@nextui-org/system'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import * as React from 'react'
-import { UserProvider } from '@auth0/nextjs-auth0/client'
 export interface ProvidersProps {
 	children: React.ReactNode
 }
@@ -24,10 +23,8 @@ export function Providers({ children }: ProvidersProps) {
 	)
 
 	return (
-		<UserProvider>
-			<QueryClientProvider client={queryClient}>
-				<NextUIProvider navigate={router.push}>{children}</NextUIProvider>
-			</QueryClientProvider>
-		</UserProvider>
+		<QueryClientProvider client={queryClient}>
+			<NextUIProvider navigate={router.push}>{children}</NextUIProvider>
+		</QueryClientProvider>
 	)
 }

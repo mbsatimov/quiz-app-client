@@ -1,17 +1,15 @@
 'use client'
 
 import { IQuestion } from '@/types/question.interface'
-import { IQuestionResultRequest } from '@/types/quiz-result.interface'
+import { IQuestionResult } from '@/types/quiz-result.interface'
 import { Image, RadioGroup } from '@nextui-org/react'
 import React, { useCallback, useMemo } from 'react'
 import { CustomRadio } from '../ui/custom-radio'
 
 interface QuizSolverProps {
 	data: IQuestion
-	selectedOptions: IQuestionResultRequest[]
-	setSelectedOptions: React.Dispatch<
-		React.SetStateAction<IQuestionResultRequest[]>
-	>
+	selectedOptions: IQuestionResult[]
+	setSelectedOptions: React.Dispatch<React.SetStateAction<IQuestionResult[]>>
 }
 export const QuizSolverTabItem: React.FC<QuizSolverProps> = ({
 	data,
@@ -24,7 +22,6 @@ export const QuizSolverTabItem: React.FC<QuizSolverProps> = ({
 				const currentQuestion = prev.find(
 					(question) => question.questionId === data.id,
 				)
-
 				if (currentQuestion) {
 					return prev.map((question) => {
 						if (question.questionId === data.id) {

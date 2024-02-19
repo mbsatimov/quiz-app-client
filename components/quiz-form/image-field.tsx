@@ -18,17 +18,17 @@ export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
 		onDrop: (acceptedFiles) => {
 			form.setValue(`questions.${itemIndex}.pictureUrl`, acceptedFiles[0])
 		},
+		accept: {
+			'image/png': ['.png', '.jpg', '.jpeg', '.webp', '.avif'],
+		},
 	})
+
 	return (
 		<div
 			{...getRootProps()}
 			className='group/image relative flex min-h-[100px] w-full cursor-pointer items-center justify-center rounded-md border-3 border-dashed'
 		>
-			<input
-				{...getInputProps({
-					accept: 'image/png, image/jpeg, image/jpg, image/webp',
-				})}
-			/>
+			<input {...getInputProps()} />
 
 			<div className='cursor-pointer'>
 				{pictureUrl ? (
@@ -46,7 +46,7 @@ export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
 				)}
 				{pictureUrl ? (
 					<Button
-						className='absolute -right-2 -top-2 w-4 group-hover/image:visible group-hover/image:opacity-100 md:invisible md:opacity-0'
+						className='absolute -right-2 -top-2 z-20 w-4 group-hover/image:visible group-hover/image:opacity-100 md:invisible md:opacity-0'
 						radius='full'
 						size='sm'
 						variant='flat'

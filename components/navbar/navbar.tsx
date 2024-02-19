@@ -13,7 +13,7 @@ import { NavbarItem } from './navbar-item'
 export const Navbar = () => {
 	return (
 		<NextUINavbar
-			maxWidth='md'
+			maxWidth='lg'
 			position='sticky'
 			className='bg-primary-500/20'
 		>

@@ -1,4 +1,5 @@
 import { $api } from '@/api/interceptor'
+import { TCreateQuiz } from '@/lib/validation/quiz-schema'
 import { ICreateQuiz, IQuiz, IQuizPreview } from '@/types/quiz.interface'
 import { IApiResponse } from '@/types/response/api-response.interface'
 import { AxiosResponse } from 'axios'
@@ -26,6 +27,10 @@ export const QuizService = {
 		data: ICreateQuiz
 	}): Promise<AxiosResponse<IApiResponse>> => {
 		return $api.put<IApiResponse>(`${QUIZ_URL}/${id}`, data)
+	},
+
+	toggleVisibility: (id: number): Promise<AxiosResponse<IApiResponse>> => {
+		return $api.patch<IApiResponse>(`${QUIZ_URL}/${id}/visibility`)
 	},
 
 	delete: (id: number): Promise<AxiosResponse<IApiResponse>> => {

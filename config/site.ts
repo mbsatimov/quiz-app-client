@@ -8,11 +8,15 @@ export const siteConfig = {
 	navItems: [
 		{
 			label: 'Home',
-			href: PAGES.QUIZZES,
+			href: PAGES.TEACHER_QUIZZES,
 		},
 		{
 			label: 'Create Quiz',
 			href: PAGES.CREATE_QUIZ,
+		},
+		{
+			label: 'Teachers',
+			href: PAGES.USERS,
 		},
 	],
 }

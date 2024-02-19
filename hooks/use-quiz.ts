@@ -1,11 +1,16 @@
-import { QUIZ } from '@/const/query-keys'
-import { QuizService } from '@/services/quiz.service.service'
+'use client'
+
+import { QUIZ_QUERY_KEY } from '@/const/query-keys'
+import { PAGES } from '@/const/routes'
+import { realisticConfetti } from '@/lib/helpers/canvas-confetti'
+import { QuizService } from '@/services/quiz.service'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { redirect } from 'next/navigation'
 import { toast } from 'sonner'
 
 export const useGetAllQuizzes = () => {
 	return useQuery({
-		queryKey: [QUIZ],
+		queryKey: [QUIZ_QUERY_KEY],
 		queryFn: QuizService.getAll,
 		select: (data) => data.data,
 	})
@@ -13,7 +18,7 @@ export const useGetAllQuizzes = () => {
 
 export const useGetQuizById = (id: number) => {
 	return useQuery({
-		queryKey: [QUIZ, id],
+		queryKey: [QUIZ_QUERY_KEY, id],
 		queryFn: () => QuizService.getById(id),
 		select: (data) => data.data,
 		enabled: !!id,
@@ -26,11 +31,29 @@ export const useCreateQuiz = () => {
 	return useMutation({
 		mutationFn: QuizService.create,
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUIZ] })
+			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY] })
 			toast.success('Quiz created successfully 😏')
+			realisticConfetti()
+			redirect(PAGES.TEACHER_QUIZZES)
 		},
 		onError: () => {
 			toast.error('Quiz creation failed 😕')
+		},
+	})
+}
+
+export const useToggleQuizVisibility = (id: number, isVisible: boolean) => {
+	const queryClient = useQueryClient()
+
+	return useMutation({
+		mutationFn: QuizService.toggleVisibility,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY] })
+			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY, id] })
+			toast.success(`Quiz ${isVisible ? 'hidden' : 'visible'}`)
+		},
+		onError: () => {
+			toast.error('Quiz visibility toggle failed 😕')
 		},
 	})
 }
@@ -41,8 +64,8 @@ export const useUpdateQuiz = (id: number) => {
 	return useMutation({
 		mutationFn: QuizService.update,
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUIZ] })
-			queryClient.invalidateQueries({ queryKey: [QUIZ, id] })
+			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY] })
+			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY, id] })
 			toast.success('Quiz updated successfully 😉')
 		},
 		onError: () => {
@@ -57,7 +80,7 @@ export const useDeleteQuiz = () => {
 	return useMutation({
 		mutationFn: QuizService.delete,
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUIZ] })
+			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY] })
 			toast.success('Quiz deleted successfully 👌')
 		},
 		onError: () => {

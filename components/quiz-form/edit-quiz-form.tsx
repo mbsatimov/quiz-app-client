@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form'
 
-import { realisticConfetti } from '@/lib/canvas-confetti'
+import { realisticConfetti } from '@/lib/helpers/canvas-confetti'
 import { CreateQuizSchema, TCreateQuiz } from '@/lib/validation/quiz-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@nextui-org/button'
