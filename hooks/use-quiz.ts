@@ -17,7 +17,7 @@ export const useGetAllQuizzesOfCurrentTeacher = () => {
 
 export const useGetAllVisibleQuizzes = () => {
 	return useQuery({
-		queryKey: [QUIZ_QUERY_KEY, { isVisible: true }],
+		queryKey: [QUIZ_QUERY_KEY, 'visible'],
 		queryFn: QuizService.getAllVisible,
 		select: (data) => data.data,
 	})
