@@ -1,12 +1,12 @@
 export const enum EnumRole {
 	TEACHER = 'TEACHER',
-	SUPER_TEACHER = 'TEACHER_ADMIN',
+	SUPER_TEACHER = 'SUPER_TEACHER',
 }
 
 export interface IUser {
 	id: number
-	firstname: string
-	lastname: string
+	firstName: string
+	lastName: string
 	username: string
 	role: EnumRole
 }

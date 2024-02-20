@@ -2,14 +2,9 @@
 
 import { IQuestion } from '@/types/question.interface'
 import { IQuestionResult } from '@/types/quiz-result.interface'
-import {
-	Card,
-	CardBody,
-	CardHeader,
-	RadioGroup,
-} from '@nextui-org/react'
-import { CustomRadio } from '../ui/custom-radio'
+import { Card, CardBody, CardHeader, RadioGroup } from '@nextui-org/react'
 import Image from 'next/image'
+import { CustomRadio } from '../ui/custom-radio'
 
 interface DetailedResultProps {
 	data: IQuestion[]
@@ -46,7 +41,7 @@ export const DetailedResult: React.FC<DetailedResultProps> = ({
 									<Image
 										src={question.picture}
 										alt='Uploaded image'
-										className='rounded-md shadow-sm max-h-[150px] object-contain sm:max-h-[320px]'
+										className='max-h-[250px] rounded-md object-contain shadow-sm sm:max-h-[320px]'
 										width={1500}
 										height={1000}
 									/>

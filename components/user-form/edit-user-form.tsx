@@ -31,8 +31,8 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
 	const form = useForm<TCreateUser>({
 		resolver: zodResolver(CreateUserSchema),
 		defaultValues: {
-			firstname: user.firstname,
-			lastname: user.lastname,
+			firstName: user.firstName,
+			lastName: user.lastName,
 			username: user.username,
 			password: '',
 			confirmPassword: '',
@@ -40,7 +40,10 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
 	})
 
 	const onSubmit = (data: TCreateUser) => {
-		updateUser.mutateAsync({ id: user.id, data }).then(() => onOpenChange())
+		const { confirmPassword, ...rest } = data
+		updateUser
+			.mutateAsync({ id: user.id, data: rest })
+			.then(() => onOpenChange())
 	}
 
 	return (
@@ -64,7 +67,7 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({
 					{(onClose) => (
 						<form onSubmit={form.handleSubmit(onSubmit)}>
 							<ModalHeader className='flex flex-col gap-1'>
-								Add New Teacher
+								Edit Teacher
 							</ModalHeader>
 							<ModalBody>
 								<UserFormFields form={form} />

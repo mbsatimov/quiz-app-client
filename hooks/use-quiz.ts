@@ -1,21 +1,15 @@
 'use client'
 
 import { QUIZ_QUERY_KEY } from '@/const/query-keys'
+import { PAGES } from '@/const/routes'
 import { QuizService } from '@/services/quiz.service'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-
-export const useGetAllQuizzes = () => {
-	return useQuery({
-		queryKey: [QUIZ_QUERY_KEY],
-		queryFn: QuizService.getAll,
-		select: (data) => data.data,
-	})
-}
 
 export const useGetAllQuizzesOfCurrentTeacher = () => {
 	return useQuery({
-		queryKey: [QUIZ_QUERY_KEY, 'teacher'],
+		queryKey: [QUIZ_QUERY_KEY],
 		queryFn: QuizService.getAllOfCurrentTeacher,
 		select: (data) => data.data,
 	})
@@ -56,12 +50,14 @@ export const useGetVisibleQuizzesByTeacherId = (teacherId: number) => {
 
 export const useCreateQuiz = () => {
 	const queryClient = useQueryClient()
+	const router = useRouter()
 
 	return useMutation({
 		mutationFn: QuizService.create,
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY] })
 			toast.success('Quiz created successfully 😏')
+			router.push(PAGES.TEACHER_QUIZZES)
 		},
 		onError: () => {
 			toast.error('Quiz creation failed 😕')
@@ -85,21 +81,21 @@ export const useToggleQuizVisibility = (id: number, isVisible: boolean) => {
 	})
 }
 
-export const useUpdateQuiz = (id: number) => {
-	const queryClient = useQueryClient()
+// export const useUpdateQuiz = (id: number) => {
+// 	const queryClient = useQueryClient()
 
-	return useMutation({
-		mutationFn: QuizService.update,
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY] })
-			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY, id] })
-			toast.success('Quiz updated successfully 😉')
-		},
-		onError: () => {
-			toast.error('Quiz update failed 😕')
-		},
-	})
-}
+// 	return useMutation({
+// 		mutationFn: QuizService.update,
+// 		onSuccess: () => {
+// 			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY] })
+// 			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY, id] })
+// 			toast.success('Quiz updated successfully 😉')
+// 		},
+// 		onError: () => {
+// 			toast.error('Quiz update failed 😕')
+// 		},
+// 	})
+// }
 
 export const useDeleteQuiz = () => {
 	const queryClient = useQueryClient()

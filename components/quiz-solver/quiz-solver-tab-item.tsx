@@ -3,9 +3,9 @@
 import { IQuestion } from '@/types/question.interface'
 import { IQuestionResult } from '@/types/quiz-result.interface'
 import { RadioGroup } from '@nextui-org/react'
+import Image from 'next/image'
 import React, { useCallback, useMemo } from 'react'
 import { CustomRadio } from '../ui/custom-radio'
-import Image from 'next/image'
 
 interface QuizSolverProps {
 	data: IQuestion
@@ -56,12 +56,13 @@ export const QuizSolverTabItem: React.FC<QuizSolverProps> = ({
 			<p className='text-center text-2xl font-bold md:text-3xl'>
 				{data.question}
 			</p>
-			{data.picture && (
+			{data?.picture && (
 				<div className='flex justify-center'>
 					<Image
+						priority
 						src={data.picture}
 						alt='Uploaded image'
-						className='max-h-[150px] rounded-md object-contain shadow-sm sm:max-h-[320px] sm:max-w-full'
+						className='max-h-[250px] rounded-md object-contain shadow-sm sm:max-h-[320px] sm:max-w-full'
 						width={1500}
 						height={1000}
 					/>
@@ -71,7 +72,7 @@ export const QuizSolverTabItem: React.FC<QuizSolverProps> = ({
 				value={selectedOption?.answerId.toString() || ''}
 				onValueChange={handleValueChange}
 			>
-				{data.options.map((option, index) => (
+				{data?.options?.map((option, index) => (
 					<CustomRadio
 						key={index}
 						value={String(option.id)}

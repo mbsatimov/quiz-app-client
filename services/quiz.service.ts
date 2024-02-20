@@ -37,15 +37,15 @@ export const QuizService = {
 		return $api.post<IApiResponse>(QUIZ_URL, data)
 	},
 
-	update: ({
-		id,
-		data,
-	}: {
-		id: number
-		data: ICreateQuiz
-	}): Promise<AxiosResponse<IApiResponse>> => {
-		return $api.put<IApiResponse>(`${QUIZ_URL}/${id}`, data)
-	},
+	// update: ({
+	// 	id,
+	// 	data,
+	// }: {
+	// 	id: number
+	// 	data: ICreateQuiz
+	// }): Promise<AxiosResponse<IApiResponse>> => {
+	// 	return $api.put<IApiResponse>(`${QUIZ_URL}/${id}`, data)
+	// },
 
 	toggleVisibility: (id: number): Promise<AxiosResponse<IApiResponse>> => {
 		return $api.patch<IApiResponse>(`${QUIZ_URL}/${id}/visible-toggle`)

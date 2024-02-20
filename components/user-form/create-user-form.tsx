@@ -22,15 +22,17 @@ export const CreateUserForm = () => {
 	const form = useForm<TCreateUser>({
 		resolver: zodResolver(CreateUserSchema),
 		defaultValues: {
-			firstname: '',
-			lastname: '',
+			firstName: '',
+			lastName: '',
 			username: '',
 			password: '',
 		},
 	})
 
 	const onSubmit = (data: TCreateUser) => {
-		createUser.mutateAsync(data).then(() => onOpenChange())
+		const { confirmPassword, ...rest } = data
+
+		createUser.mutateAsync(rest).then(() => onOpenChange())
 	}
 
 	return (

@@ -2,7 +2,7 @@ import { TCreateUser } from '@/lib/validation/user-schema'
 import { Input, InputProps } from '@nextui-org/react'
 import { Eye, EyeOff } from 'lucide-react'
 import React from 'react'
-import { UseFormReturn } from 'react-hook-form'
+import { Controller, UseFormReturn } from 'react-hook-form'
 
 interface UserFormFieldsProps extends Omit<InputProps, 'form'> {
 	form: UseFormReturn<TCreateUser>
@@ -15,32 +15,50 @@ export const UserFormFields: React.FC<UserFormFieldsProps> = ({ form }) => {
 
 	return (
 		<>
-			<Input
-				{...form.register('firstname')}
-				color='primary'
-				label='Firstname'
-				labelPlacement='outside'
-				isInvalid={!!errors.firstname}
-				defaultValue={form.getValues().firstname}
-				errorMessage={errors.firstname?.message}
+			<Controller
+				control={form.control}
+				name='firstName'
+				render={({ field }) => (
+					<Input
+						{...field}
+						color='primary'
+						label='Firstname'
+						labelPlacement='outside'
+						isInvalid={!!errors.firstName}
+						defaultValue={form.getValues().firstName}
+						errorMessage={errors.firstName?.message}
+					/>
+				)}
 			/>
-			<Input
-				{...form.register('lastname')}
-				color='primary'
-				label='Lastname'
-				labelPlacement='outside'
-				isInvalid={!!errors.lastname}
-				defaultValue={form.getValues().lastname}
-				errorMessage={errors.lastname?.message}
+			<Controller
+				control={form.control}
+				name='lastName'
+				render={({ field }) => (
+					<Input
+						{...field}
+						color='primary'
+						label='Lastname'
+						labelPlacement='outside'
+						isInvalid={!!errors.lastName}
+						defaultValue={form.getValues().lastName}
+						errorMessage={errors.lastName?.message}
+					/>
+				)}
 			/>
-			<Input
-				{...form.register('username')}
-				color='primary'
-				label='Username'
-				labelPlacement='outside'
-				isInvalid={!!errors.username}
-				defaultValue={form.getValues().username}
-				errorMessage={errors.username?.message}
+			<Controller
+				control={form.control}
+				name='username'
+				render={({ field }) => (
+					<Input
+						{...field}
+						color='primary'
+						label='Username'
+						labelPlacement='outside'
+						isInvalid={!!errors.username}
+						defaultValue={form.getValues().username}
+						errorMessage={errors.username?.message}
+					/>
+				)}
 			/>
 			<Input
 				{...form.register('password')}
@@ -48,7 +66,6 @@ export const UserFormFields: React.FC<UserFormFieldsProps> = ({ form }) => {
 				label='Password'
 				labelPlacement='outside'
 				isInvalid={!!errors.password}
-				defaultValue={form.getValues().password}
 				errorMessage={errors.password?.message}
 				endContent={
 					<button
@@ -77,7 +94,6 @@ export const UserFormFields: React.FC<UserFormFieldsProps> = ({ form }) => {
 				label='Confirm password'
 				labelPlacement='outside'
 				isInvalid={!!errors.confirmPassword}
-				defaultValue={form.getValues().confirmPassword}
 				errorMessage={errors.confirmPassword?.message}
 				endContent={
 					<button

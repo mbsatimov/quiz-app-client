@@ -1,21 +1,21 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { Button } from '@nextui-org/react'
+import { Button, ButtonProps } from '@nextui-org/react'
 
 import { NavbarItem as NextUINavbarItem } from '@nextui-org/navbar'
 
-import { usePathname } from 'next/navigation'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
-interface NavbarItemProps {
+interface NavbarItemProps extends ButtonProps {
 	item: {
 		label: string
 		href: string
 	}
 }
 
-export function NavbarItem({ item }: NavbarItemProps) {
+export function NavbarItem({ item, className, ...props }: NavbarItemProps) {
 	const pathname = usePathname()
 
 	return (
@@ -29,8 +29,10 @@ export function NavbarItem({ item }: NavbarItemProps) {
 				color='primary'
 				className={cn(
 					'text-lg data-[active=true]:font-semibold data-[active=true]:text-primary',
+					className,
 				)}
 				href={item.href}
+				{...props}
 			>
 				{item.label}
 			</Button>

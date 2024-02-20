@@ -20,7 +20,7 @@ import {
 	Switch,
 	useDisclosure,
 } from '@nextui-org/react'
-import { Edit, Eye, EyeOff, MoreHorizontal, Trash } from 'lucide-react'
+import { Eye, EyeOff, MoreHorizontal, Trash } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
@@ -63,14 +63,6 @@ export const TeacherQuizItem: React.FC<TeacherQuizItemProps> = ({
 						</DropdownTrigger>
 						<DropdownMenu aria-label='Actions'>
 							<DropdownItem
-								key='edit'
-								as={Link}
-								href={PAGES.EDIT_QUIZ(teacherQuizItem.id)}
-								startContent={<Edit size={18} />}
-							>
-								Edit quiz
-							</DropdownItem>
-							<DropdownItem
 								key='delete'
 								startContent={<Trash size={18} />}
 								className='text-danger'
@@ -84,7 +76,7 @@ export const TeacherQuizItem: React.FC<TeacherQuizItemProps> = ({
 				</div>
 			</CardHeader>
 			<CardBody>
-				<div className='flex items-end justify-between'>
+				<div className='flex items-end justify-between gap-4'>
 					<div>
 						<div className='mb-2'>
 							<Switch

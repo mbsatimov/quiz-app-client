@@ -10,8 +10,6 @@ import { toBase64 } from '@/lib/helpers/global-helpers'
 import { Button, Divider } from '@nextui-org/react'
 import { QuizDetailsFields } from './quiz-details-fields'
 import { QuizItemFields } from './quiz-item-fields'
-import { redirect } from 'next/navigation'
-import { PAGES } from '@/const/routes'
 
 export const CreateQuizForm = () => {
 	const createQuiz = useCreateQuiz()
@@ -19,6 +17,9 @@ export const CreateQuizForm = () => {
 	const form = useForm<TCreateQuiz>({
 		resolver: zodResolver(CreateQuizSchema),
 		defaultValues: {
+			title: '',
+			description: '',
+			isVisible: false,
 			questions: [
 				{
 					question: '',
@@ -51,7 +52,6 @@ export const CreateQuizForm = () => {
 			.mutateAsync({ ...data, questions: questionsWithBase64Pictures })
 			.then(() => {
 				form.reset()
-				redirect(PAGES.TEACHER_QUIZZES)
 			})
 	}
 

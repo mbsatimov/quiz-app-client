@@ -2,8 +2,8 @@ import { z } from 'zod'
 
 export const CreateUserSchema = z
 	.object({
-		firstname: z.string().refine((val) => val.length > 0),
-		lastname: z.string().refine((val) => val.length > 0),
+		firstName: z.string().refine((val) => val.length > 0),
+		lastName: z.string().refine((val) => val.length > 0),
 		username: z.string().refine((val) => val.length > 0),
 		password: z
 			.string()

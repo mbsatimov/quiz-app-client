@@ -3,7 +3,7 @@ import { IApiResponse } from '@/types/response/api-response.interface'
 import { ICreateUser, IUser } from '@/types/user.interface'
 import { AxiosResponse } from 'axios'
 
-const USER_URL = '/users'
+const USER_URL = '/user'
 
 export const UserService = {
 	getAll: (): Promise<AxiosResponse<IUser[]>> => {

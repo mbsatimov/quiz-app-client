@@ -16,7 +16,7 @@ export const StudentQuizItem: React.FC<StudentQuizItemProps> = ({
 	return (
 		<Card shadow='sm'>
 			<CardBody>
-				<div className='flex items-end justify-between'>
+				<div className='flex items-end justify-between gap-4'>
 					<div>
 						<h3 className='text-lg font-semibold'>{studentQuizItem.title}</h3>
 						<p className='text-default-500'>{studentQuizItem.description}</p>

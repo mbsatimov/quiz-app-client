@@ -5,7 +5,7 @@ import { toast } from 'sonner'
 
 export const useGetUsers = () => {
 	return useQuery({
-		queryKey: ['users'],
+		queryKey: [USER_QUERY_KEY],
 		queryFn: () => UserService.getAll(),
 		select: (data) => data.data,
 	})

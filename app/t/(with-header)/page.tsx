@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default function Home() {
 	return (
-		<section className='mx-auto max-w-4xl space-y-4'>
+		<section className='mx-auto max-w-4xl space-y-4 py-4'>
 			<h1
 				className={title({ size: 'sm', className: 'mb-6 block text-center' })}
 			>

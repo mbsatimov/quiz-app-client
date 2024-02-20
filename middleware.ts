@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { EnumTokens } from './services/auth.service'
-import { EnumRole, IUser } from './types/user.interface'
+import { IUser } from './types/user.interface'
 
 export function middleware(req: NextRequest) {
 	const { pathname } = req.nextUrl
 
 	const isLoginPage = pathname === '/auth/login'
 	// Parse current user from cookies
-	const currentUserJSON = req.cookies.get(EnumTokens.CURRENT_USER)?.value
-	const currentUser = currentUserJSON
-		? (JSON.parse(currentUserJSON) as IUser)
-		: null
+	const currentUser = JSON.parse(
+		req.cookies.get('currentUser')?.value || 'null',
+	) as IUser
 
 	const isAuthenticated =
 		req.cookies.get(EnumTokens.ACCESS_TOKEN) &&
@@ -20,13 +19,6 @@ export function middleware(req: NextRequest) {
 	if (isAuthenticated) {
 		if (isLoginPage) {
 			return NextResponse.redirect(new URL('/t', req.url))
-		}
-
-		if (
-			pathname === '/t/users' &&
-			currentUser.role !== EnumRole.SUPER_TEACHER
-		) {
-			return NextResponse.redirect(new URL('/404', req.url))
 		}
 	} else {
 		if (isLoginPage) {
