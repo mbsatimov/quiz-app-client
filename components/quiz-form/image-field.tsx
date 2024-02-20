@@ -1,8 +1,9 @@
 'use client'
 
 import { TCreateQuiz } from '@/lib/validation/quiz-schema'
-import { Button, Image } from '@nextui-org/react'
+import { Button } from '@nextui-org/react'
 import { X } from 'lucide-react'
+import Image from 'next/image'
 import { useDropzone } from 'react-dropzone'
 import { UseFormReturn } from 'react-hook-form'
 
@@ -39,7 +40,9 @@ export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
 								: URL.createObjectURL(picture)
 						}
 						alt='Uploaded image'
-						className='max-h-80 max-w-full object-contain'
+						className='max-h-80 max-w-full rounded-md object-contain shadow-sm'
+						width={1500}
+						height={1000}
 					/>
 				) : (
 					<p>Drag and drop image here or click to browse.</p>

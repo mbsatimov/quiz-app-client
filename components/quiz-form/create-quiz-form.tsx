@@ -6,10 +6,10 @@ import { useCreateQuiz } from '@/hooks/use-quiz'
 import { CreateQuizSchema, TCreateQuiz } from '@/lib/validation/quiz-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
+import { toBase64 } from '@/lib/helpers/global-helpers'
 import { Button, Divider } from '@nextui-org/react'
 import { QuizDetailsFields } from './quiz-details-fields'
 import { QuizItemFields } from './quiz-item-fields'
-import { toBase64 } from '@/lib/helpers/global-helpers'
 
 export const CreateQuizForm = () => {
 	const createQuiz = useCreateQuiz()
@@ -45,7 +45,11 @@ export const CreateQuizForm = () => {
 			}),
 		)
 
-		createQuiz.mutate({ ...data, questions: questionsWithBase64Pictures })
+		createQuiz
+			.mutateAsync({ ...data, questions: questionsWithBase64Pictures })
+			.then(() => {
+				form.reset()
+			})
 	}
 
 	return (
@@ -53,10 +57,7 @@ export const CreateQuizForm = () => {
 			className='space-y-6'
 			onSubmit={form.handleSubmit(onSubmit)}
 		>
-			<QuizDetailsFields
-				errors={form.formState.errors}
-				form={form}
-			/>
+			<QuizDetailsFields form={form} />
 			<Divider className='my-4 bg-blue-500' />
 			<QuizItemFields form={form} />
 			<Button

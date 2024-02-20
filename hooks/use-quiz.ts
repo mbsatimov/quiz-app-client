@@ -66,7 +66,6 @@ export const useCreateQuiz = () => {
 			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY] })
 			toast.success('Quiz created successfully 😏')
 			realisticConfetti()
-			redirect(PAGES.TEACHER_QUIZZES)
 		},
 		onError: () => {
 			toast.error('Quiz creation failed 😕')

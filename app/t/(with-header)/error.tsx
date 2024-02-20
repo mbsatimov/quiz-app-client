@@ -16,7 +16,7 @@ export default function Error({
 	}, [error])
 
 	return (
-		<div className='flex h-screen w-screen flex-col items-center justify-center'>
+		<div className='mt-20 flex flex-col items-center justify-center'>
 			<div className='flex w-full flex-col items-center space-y-5 rounded-md border bg-accent/50 p-6 backdrop-blur-md sm:p-14 md:max-w-[700px] md:p-20'>
 				<h1 className='text-7xl font-extrabold md:text-9xl'>500</h1>
 				<h2 className='text-center text-2xl font-bold uppercase md:text-3xl'>

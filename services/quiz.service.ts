@@ -16,7 +16,7 @@ export const QuizService = {
 	},
 
 	getAllVisible: (): Promise<AxiosResponse<IQuizPreview[]>> => {
-		return $apiAuth.get<IQuizPreview[]>(`/open/visible`)
+		return $apiAuth.get<IQuizPreview[]>(`/open/all/visible`)
 	},
 
 	getById: (id: number): Promise<AxiosResponse<IQuiz>> => {

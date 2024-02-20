@@ -5,9 +5,5 @@ export default function TeacherQuizPage({
 }: {
 	params: { quizId: string }
 }) {
-	return (
-		<div className='mx-auto h-screen max-w-2xl px-4 py-6 md:py-8'>
-			<QuizSolverContent quizId={Number(params.quizId)} />
-		</div>
-	)
+	return <QuizSolverContent quizId={Number(params.quizId)} />
 }

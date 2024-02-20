@@ -38,7 +38,7 @@ export const QuizSolverContent: React.FC<QuizSolverContentProps> = ({
 	if (!questions.isSuccess) throw new Error()
 
 	const isSelectedFirstTab = currentTab === '1'
-	const isSelectedLastTab = currentTab === questions.data.length.toString()
+	const isSelectedLastTab = currentTab === questions.data.length?.toString()
 
 	const handlePrev = () => {
 		if (isSelectedFirstTab) return
@@ -58,7 +58,7 @@ export const QuizSolverContent: React.FC<QuizSolverContentProps> = ({
 					selectedOptions={selectedOptions}
 				/>
 			) : (
-				<div className='mx-auto flex h-screen w-full max-w-2xl flex-col justify-between px-4 py-6 md:py-8'>
+				<div className='relative mx-auto flex h-screen w-full max-w-2xl flex-col justify-between px-4 py-6 md:py-8'>
 					<QuizSolverTabs
 						selectedOptions={selectedOptions}
 						setSelectedOptions={setSelectedOptions}

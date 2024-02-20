@@ -2,9 +2,10 @@
 
 import { IQuestion } from '@/types/question.interface'
 import { IQuestionResult } from '@/types/quiz-result.interface'
-import { Image, RadioGroup } from '@nextui-org/react'
+import { RadioGroup } from '@nextui-org/react'
 import React, { useCallback, useMemo } from 'react'
 import { CustomRadio } from '../ui/custom-radio'
+import Image from 'next/image'
 
 interface QuizSolverProps {
 	data: IQuestion
@@ -58,11 +59,11 @@ export const QuizSolverTabItem: React.FC<QuizSolverProps> = ({
 			{data.picture && (
 				<div className='flex justify-center'>
 					<Image
-						src={
-							'https://github.githubassets.com/assets/gh-desktop-7c9388a38509.png'
-						}
+						src={data.picture}
 						alt='Uploaded image'
-						className=' max-h-[150px] max-w-[300px] object-contain sm:max-h-[320px]'
+						className='max-h-[150px] rounded-md object-contain shadow-sm sm:max-h-[320px] sm:max-w-full'
+						width={1500}
+						height={1000}
 					/>
 				</div>
 			)}

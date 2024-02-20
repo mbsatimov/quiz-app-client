@@ -6,10 +6,10 @@ import {
 	Card,
 	CardBody,
 	CardHeader,
-	Image,
 	RadioGroup,
 } from '@nextui-org/react'
 import { CustomRadio } from '../ui/custom-radio'
+import Image from 'next/image'
 
 interface DetailedResultProps {
 	data: IQuestion[]
@@ -46,7 +46,9 @@ export const DetailedResult: React.FC<DetailedResultProps> = ({
 									<Image
 										src={question.picture}
 										alt='Uploaded image'
-										className=' max-h-[150px] max-w-[300px] object-contain sm:max-h-[320px]'
+										className='rounded-md shadow-sm max-h-[150px] object-contain sm:max-h-[320px]'
+										width={1500}
+										height={1000}
 									/>
 								</div>
 							)}
