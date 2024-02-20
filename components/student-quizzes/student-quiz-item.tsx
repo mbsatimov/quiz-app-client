@@ -2,7 +2,8 @@
 
 import { PAGES } from '@/const/routes'
 import { IQuizPreview } from '@/types/quiz.interface'
-import { Button, Card, CardBody, Link } from '@nextui-org/react'
+import { Button, Card, CardBody } from '@nextui-org/react'
+import Link from 'next/link'
 import React from 'react'
 
 interface StudentQuizItemProps {

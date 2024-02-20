@@ -1,14 +1,14 @@
 'use client'
 
 import { PAGES } from '@/const/routes'
+import { IQuestion } from '@/types/question.interface'
 import { IQuestionResult } from '@/types/quiz-result.interface'
-import { IQuiz } from '@/types/quiz.interface'
-import { Button, Card, CardBody, Link } from '@nextui-org/react'
+import { Button, Card, CardBody } from '@nextui-org/react'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import { DetailedResult } from './detailed-results'
 import { OverallResult } from './overall-result'
-import { IQuestion } from '@/types/question.interface'
+import Link from 'next/link'
 
 interface QuizResultsProps {
 	data: IQuestion[]

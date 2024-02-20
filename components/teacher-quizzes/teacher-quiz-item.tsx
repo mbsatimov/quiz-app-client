@@ -12,7 +12,6 @@ import {
 	DropdownItem,
 	DropdownMenu,
 	DropdownTrigger,
-	Link,
 	Modal,
 	ModalContent,
 	ModalFooter,
@@ -22,6 +21,7 @@ import {
 	useDisclosure,
 } from '@nextui-org/react'
 import { Edit, Eye, EyeOff, MoreHorizontal, Trash } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 interface TeacherQuizItemProps {
@@ -61,12 +61,11 @@ export const TeacherQuizItem: React.FC<TeacherQuizItemProps> = ({
 								<MoreHorizontal />
 							</Button>
 						</DropdownTrigger>
-						<DropdownMenu>
+						<DropdownMenu aria-label='Actions'>
 							<DropdownItem
 								key='edit'
 								as={Link}
 								href={PAGES.EDIT_QUIZ(teacherQuizItem.id)}
-								aria-label='Dropdown menu with icons'
 								startContent={<Edit size={18} />}
 							>
 								Edit quiz

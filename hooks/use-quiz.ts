@@ -1,11 +1,8 @@
 'use client'
 
 import { QUIZ_QUERY_KEY } from '@/const/query-keys'
-import { PAGES } from '@/const/routes'
-import { realisticConfetti } from '@/lib/helpers/canvas-confetti'
 import { QuizService } from '@/services/quiz.service'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { redirect } from 'next/navigation'
 import { toast } from 'sonner'
 
 export const useGetAllQuizzes = () => {
@@ -65,7 +62,6 @@ export const useCreateQuiz = () => {
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: [QUIZ_QUERY_KEY] })
 			toast.success('Quiz created successfully 😏')
-			realisticConfetti()
 		},
 		onError: () => {
 			toast.error('Quiz creation failed 😕')

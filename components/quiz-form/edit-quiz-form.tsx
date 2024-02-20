@@ -3,7 +3,6 @@
 import { useForm } from 'react-hook-form'
 
 import { useGetQuizById, useUpdateQuiz } from '@/hooks/use-quiz'
-import { realisticConfetti } from '@/lib/helpers/canvas-confetti'
 import { toBase64 } from '@/lib/helpers/global-helpers'
 import { CreateQuizSchema, TCreateQuiz } from '@/lib/validation/quiz-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -90,7 +89,6 @@ export const EditQuizForm: React.FC<EditQuizFormProps> = ({ quizId }) => {
 				size='lg'
 				variant='shadow'
 				className='w-full'
-				onPress={realisticConfetti}
 			>
 				Edit Quiz
 			</Button>
