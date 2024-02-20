@@ -10,8 +10,7 @@ function NotFound() {
 					Opps! page not found
 				</h2>
 				<p className='text-center'>
-					Sorry, the page you are looking for doesn&apos;t exist. If you think
-					something is broken, report a problem.
+					Sorry, the page you are looking for doesn&apos;t exist.
 				</p>
 				<Button
 					as={Link}

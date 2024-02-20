@@ -2,14 +2,14 @@
 
 import { useForm } from 'react-hook-form'
 
-import { useGetQuizById, useGetQuizQuestionsById } from '@/hooks/use-quiz'
+import { useGetQuizById } from '@/hooks/use-quiz'
 import { realisticConfetti } from '@/lib/helpers/canvas-confetti'
 import { CreateQuizSchema, TCreateQuiz } from '@/lib/validation/quiz-schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@nextui-org/button'
 import { Divider } from '@nextui-org/divider'
-import { Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { Loading } from '../loading'
 import { QuizDetailsFields } from './quiz-details-fields'
 import { QuizItemFields } from './quiz-item-fields'
 
@@ -41,9 +41,9 @@ export const EditQuizForm: React.FC<EditQuizFormProps> = ({ quizId }) => {
 		},
 	})
 
-	if (quiz.isLoading) return <Loader2 className='h-6 w-6 animate-spin' />
+	if (quiz.isLoading) return <Loading />
 
-	if (!quiz.isSuccess) return <div>Something went wrong. Please try again</div>
+	if (!quiz.isSuccess) throw new Error()
 
 	const onSubmit = (data: TCreateQuiz) => {
 		console.log(data)

@@ -1,42 +1,19 @@
+'use client'
+
 import { useGetAllVisibleQuizzes } from '@/hooks/use-quiz'
-import { IQuizPreview } from '@/types/quiz.interface'
-import { Loader2 } from 'lucide-react'
+import { Loading } from '../loading'
 import { StudentQuizItem } from './student-quiz-item'
 
-const data: IQuizPreview[] = [
-	{
-		id: 1,
-		title: 'English 1',
-		isVisible: true,
-		description: 'lorem ipsum dolor sit amet consectetur adipiscing elit',
-	},
-	{
-		id: 2,
-		title: 'English 2',
-		isVisible: true,
-		description: 'lorem ipsum dolor sit amet consectetur adipiscing elit',
-	},
-]
-
-interface StudentQuizListProps {
-	quizId: number
-}
-
-export const StudentQuizList: React.FC<StudentQuizListProps> = ({ quizId }) => {
+export const StudentQuizList = () => {
 	const quizzes = useGetAllVisibleQuizzes()
 
-	if (quizzes.isLoading) return <Loader2 className='h-6 w-6 animate-spin' />
+	if (quizzes.isLoading) return <Loading />
 
-	if (!quizzes.isSuccess)
-		return (
-			<div className='text-center text-xl text-danger'>
-				Something went wrong. Please try again
-			</div>
-		)
+	if (!quizzes.isSuccess) throw new Error()
 
 	return (
 		<div className='space-y-4'>
-			{data.map((quiz) => (
+			{quizzes.data.map((quiz) => (
 				<StudentQuizItem
 					key={quiz.id}
 					studentQuizItem={quiz}

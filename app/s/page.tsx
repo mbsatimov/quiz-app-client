@@ -1,11 +1,7 @@
 import { title } from '@/components/primitives'
 import { StudentQuizList } from '@/components/student-quizzes/student-quiz-list'
 
-export default function StudentQuizzesPage({
-	params: { quizId },
-}: {
-	params: { quizId: string }
-}) {
+export default function StudentQuizzesPage() {
 	return (
 		<main className='mx-auto max-w-2xl space-y-4 py-8'>
 			<h1
@@ -13,7 +9,7 @@ export default function StudentQuizzesPage({
 			>
 				Student Quizzes
 			</h1>
-			<StudentQuizList quizId={Number(quizId)} />
+			<StudentQuizList />
 		</main>
 	)
 }

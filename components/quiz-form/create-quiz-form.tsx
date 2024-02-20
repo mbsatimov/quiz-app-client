@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Divider } from '@nextui-org/react'
 import { QuizDetailsFields } from './quiz-details-fields'
 import { QuizItemFields } from './quiz-item-fields'
+import { toBase64 } from '@/lib/helpers/global-helpers'
 
 export const CreateQuizForm = () => {
 	const createQuiz = useCreateQuiz()
@@ -27,22 +28,6 @@ export const CreateQuizForm = () => {
 			],
 		},
 	})
-
-	const toBase64 = (file: File) => {
-		return new Promise((resolve, reject) => {
-			const fileReader = new FileReader()
-
-			fileReader.readAsDataURL(file)
-
-			fileReader.onload = () => {
-				resolve(fileReader.result)
-			}
-
-			fileReader.onerror = (error) => {
-				reject(error)
-			}
-		})
-	}
 
 	const onSubmit = async (data: TCreateQuiz) => {
 		const { questions } = data
