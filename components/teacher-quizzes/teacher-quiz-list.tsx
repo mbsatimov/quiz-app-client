@@ -13,12 +13,14 @@ export const TeacherQuizList = () => {
 
 	return (
 		<div className='space-y-4'>
-			{quizzes.data.map((quiz) => (
-				<TeacherQuizItem
-					key={quiz.id}
-					teacherQuizItem={quiz}
-				/>
-			))}
+			{quizzes.data
+				.sort((a, b) => b.id - a.id)
+				.map((quiz) => (
+					<TeacherQuizItem
+						key={quiz.id}
+						teacherQuizItem={quiz}
+					/>
+				))}
 		</div>
 	)
 }
