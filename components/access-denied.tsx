@@ -11,7 +11,8 @@ export const AccessDenied = () => {
 					Opps! page access denied
 				</h2>
 				<p className='text-center'>
-					Sorry, you don&apos;t have access to this page.
+					Sorry, you don&apos;t have access to this page. Only teacher with
+					admin role can access this page.
 				</p>
 				<Button
 					as={Link}

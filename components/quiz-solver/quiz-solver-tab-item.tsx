@@ -57,16 +57,14 @@ export const QuizSolverTabItem: React.FC<QuizSolverProps> = ({
 				{data.question}
 			</p>
 			{data?.picture && (
-				<div className='flex justify-center'>
-					<Image
-						priority
-						src={data.picture}
-						alt='Uploaded image'
-						className='max-h-[250px] rounded-md object-contain shadow-sm sm:max-h-[320px] sm:max-w-full'
-						width={1500}
-						height={1000}
-					/>
-				</div>
+				<Image
+					priority
+					src={data.picture}
+					alt='Uploaded image'
+					className='max-h-[250px] rounded-md object-contain shadow-sm sm:max-h-[320px] sm:max-w-full'
+					width={1500}
+					height={1000}
+				/>
 			)}
 			<RadioGroup
 				value={selectedOption?.answerId.toString() || ''}

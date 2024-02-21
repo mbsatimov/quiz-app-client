@@ -11,6 +11,9 @@ export const TeacherQuizList = () => {
 
 	if (!quizzes.isSuccess) throw new Error()
 
+	if (quizzes.data.length === 0)
+		return <div className='text-center text-lg'>No quizzes found.</div>
+
 	return (
 		<div className='space-y-4'>
 			{quizzes.data

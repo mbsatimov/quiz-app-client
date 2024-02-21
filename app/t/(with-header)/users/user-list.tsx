@@ -3,6 +3,8 @@
 import { Loading } from '@/components/loading'
 import { EditUserForm } from '@/components/user-form/edit-user-form'
 import { useDeleteUser, useGetUsers } from '@/hooks/use-user'
+import { cn } from '@/lib/utils'
+import { EnumRole } from '@/types/user.interface'
 import {
 	Button,
 	Card,
@@ -36,6 +38,9 @@ export const UserList = () => {
 				<Card
 					key={user.id}
 					shadow='sm'
+					className={cn({
+						'bg-success/20': user.role === EnumRole.SUPER_TEACHER,
+					})}
 				>
 					<CardBody className='flex-row items-center justify-between'>
 						<p className='text-lg font-semibold'>
@@ -43,15 +48,17 @@ export const UserList = () => {
 						</p>
 						<div className='flex gap-2'>
 							<EditUserForm user={user} />
-							<Button
-								variant='flat'
-								isIconOnly
-								size='sm'
-								color='danger'
-								onPress={onOpen}
-							>
-								<Trash size={18} />
-							</Button>
+							{user.role !== EnumRole.SUPER_TEACHER && (
+								<Button
+									variant='flat'
+									isIconOnly
+									size='sm'
+									color='danger'
+									onPress={onOpen}
+								>
+									<Trash size={18} />
+								</Button>
+							)}
 							<Modal
 								isOpen={isOpen}
 								onOpenChange={onOpenChange}
@@ -64,7 +71,10 @@ export const UserList = () => {
 												Delete Teacher
 											</ModalHeader>
 											<ModalBody>
-												<p>Deleting teacher will delete all quizzes created by this teacher.</p>
+												<p>
+													Deleting teacher will delete all quizzes created by
+													this teacher.
+												</p>
 											</ModalBody>
 											<ModalFooter>
 												<Button

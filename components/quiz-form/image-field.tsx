@@ -43,9 +43,10 @@ export const ImageField: React.FC<ImageFieldProps> = ({ form, itemIndex }) => {
 						className='max-h-80 max-w-full rounded-md object-contain shadow-sm'
 						width={1500}
 						height={1000}
+						priority
 					/>
 				) : (
-					<p>Drag and drop image here or click to browse.</p>
+					<p>Drag and drop image here or click to browse. Max size: 5MB</p>
 				)}
 				{picture ? (
 					<Button

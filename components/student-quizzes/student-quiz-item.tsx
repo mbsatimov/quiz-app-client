@@ -18,8 +18,14 @@ export const StudentQuizItem: React.FC<StudentQuizItemProps> = ({
 			<CardBody>
 				<div className='flex items-end justify-between gap-4'>
 					<div>
-						<h3 className='text-lg font-semibold'>{studentQuizItem.title}</h3>
-						<p className='text-default-500'>{studentQuizItem.description}</p>
+						<h3 className='text-lg font-semibold'>
+							{studentQuizItem.title}{' '}
+							<span>(by {studentQuizItem.teacherName})</span>
+						</h3>
+						<p>Number of questions: {studentQuizItem.testItemsCount}</p>
+						<p className='text-sm text-default-500'>
+							{studentQuizItem.description}
+						</p>
 					</div>
 					<div>
 						<Button
