@@ -7,16 +7,21 @@ import {
 	NavbarMenuItem,
 	NavbarMenuToggle,
 	Navbar as NextUINavbar,
+	NavbarItem as NextUINavbarItem,
 } from '@nextui-org/navbar'
 
 import { siteConfig } from '@/config/site'
 import NextLink from 'next/link'
 
+import { useLogout } from '@/hooks/use-auth'
+import { LogOut } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
+import { LogoutModal } from '../logout-modal'
 import { NavbarItem } from './navbar-item'
 
 export const Navbar = () => {
+	const logout = useLogout()
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
 	return (
@@ -54,6 +59,15 @@ export const Navbar = () => {
 						/>
 					))}
 				</ul>
+				<NextUINavbarItem>
+					<LogoutModal
+						variant='flat'
+						color='danger'
+						startContent={<LogOut size={18} />}
+					>
+						Logout
+					</LogoutModal>
+				</NextUINavbarItem>
 			</NavbarContent>
 			<NavbarMenuToggle
 				aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
@@ -71,6 +85,15 @@ export const Navbar = () => {
 						/>
 					</NavbarMenuItem>
 				))}
+				<NavbarMenuItem>
+					<LogoutModal
+						color='danger'
+						variant='flat'
+						startContent={<LogOut />}
+					>
+						Logout
+					</LogoutModal>
+				</NavbarMenuItem>
 			</NavbarMenu>
 		</NextUINavbar>
 	)
