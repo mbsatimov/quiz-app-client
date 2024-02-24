@@ -3,8 +3,8 @@ import { PAGES } from '@/const/routes'
 export type SiteConfig = typeof siteConfig
 
 export const siteConfig = {
-	name: 'Quiz App',
-	description: 'The Quiz App.',
+	name: 'PictureEnglish Tutorial',
+	description: 'The PictureEnglish Tutorial.',
 	navItems: [
 		{
 			label: 'Home',

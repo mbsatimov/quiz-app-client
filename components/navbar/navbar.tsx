@@ -13,7 +13,6 @@ import {
 import { siteConfig } from '@/config/site'
 import NextLink from 'next/link'
 
-import { useLogout } from '@/hooks/use-auth'
 import { LogOut } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
@@ -21,7 +20,6 @@ import { LogoutModal } from '../logout-modal'
 import { NavbarItem } from './navbar-item'
 
 export const Navbar = () => {
-	const logout = useLogout()
 	const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
 	return (
